@@ -16,7 +16,7 @@
                 :style="{
               width: '100%',
               }"
-            />
+             alt=""/>
           </a-carousel-item>
         </a-carousel>
       </a-grid-item>
@@ -63,7 +63,7 @@
                     <span><icon-star />{{ item.index }}</span>
                   </template>
                   <template #extra>
-                    <div className="image-area">
+                    <div>
                       <img alt="arco-design" :src="item.imageSrc" />
                     </div>
                   </template>
@@ -76,8 +76,9 @@
             </a-list>
           </a-card>
       </a-grid-item>
+
       <a-grid-item :span="{ xs: 24, sm: 24, md: 24, lg: 7, xl: 7, xxl: 7 }">
-        <div :style="{ display: 'flex' }">
+
           <a-card :body-style="{ padding:'12px 0' }"
                   :bordered="false"
                   :header-style="{ padding: '30px 10px' }"
@@ -102,7 +103,7 @@
               </a-list-item>
             </a-list>
           </a-card>
-        </div>
+
       </a-grid-item>
     </a-grid>
   </div>
@@ -111,7 +112,6 @@
 <script setup lang="ts">
 
 import {reactive} from "vue";
-import {size} from "lodash";
 
 const images = [
   '../src/assets/carousel/1.png',
@@ -157,10 +157,8 @@ const paginationProps = reactive({
 </script>
 
 <style lang="less" scoped>
-
 .container {
-  padding: 16px 20px;
-  padding-bottom: 0;
+  padding: 16px 20px 0;
 }
 
 .general-card {
@@ -168,7 +166,6 @@ const paginationProps = reactive({
   min-height: 300px;
   padding: 0;
 }
-
 
 .list-demo-action-layout .image-area {
   width: 183px;
@@ -188,19 +185,5 @@ const paginationProps = reactive({
 
 .list-demo-action-layout .arco-list-item-action .arco-icon {
   margin: 0 4px;
-}
-
-.grid-demo-grid .demo-item,
-.grid-demo-grid .demo-suffix {
-  height: 48px;
-  line-height: 48px;
-  color: var(--color-white);
-  text-align: center;
-}
-.grid-demo-grid .demo-item:nth-child(2n) {
-  background-color: rgba(var(--arcoblue-6), 0.9);
-}
-.grid-demo-grid .demo-item:nth-child(2n + 1) {
-  background-color: var(--color-primary-light-4);
 }
 </style>
