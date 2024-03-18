@@ -63,7 +63,7 @@
                     <span><icon-star />{{ item.index }}</span>
                   </template>
                   <template #extra>
-                    <div>
+                    <div className="image-area">
                       <img alt="arco-design" :src="item.imageSrc" />
                     </div>
                   </template>
@@ -158,7 +158,8 @@ const paginationProps = reactive({
 
 <style lang="less" scoped>
 .container {
-  padding: 16px 20px 0;
+  padding: 16px 20px;
+  padding-bottom: 0;
 }
 
 .general-card {
