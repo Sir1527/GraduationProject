@@ -20,7 +20,7 @@
 
   import NavBar from '@/components/navbar/index.vue';
   import Footer from '@/components/footer/index.vue';
-  import PageLayout from '@/layout/page-layout.vue';
+  import PageLayout from '@/page-layout.vue';
 
 </script>
 
