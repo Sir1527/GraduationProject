@@ -25,7 +25,7 @@
         <a-card :body-style="{ padding: '0 10px'} ">
           <div style="padding: 0">
             <a-menu mode="horizontal" :default-selected-keys="['0']" style="margin: 0">
-              <a-menu-item key="0" @click="newsTopData">最新咨询</a-menu-item>
+              <a-menu-item key="0">最新咨询</a-menu-item>
               <a-menu-item key="1">最热咨询</a-menu-item>
             </a-menu>
             <div style="padding: 0 10px">
@@ -110,7 +110,6 @@
 </template>
 
 <script setup lang="ts">
-import request from "@/utils/request";
 import {reactive} from "vue";
 
 
@@ -155,11 +154,7 @@ const paginationProps = reactive({
   total: dataSource.length
 })
 
-function newsTopData() {
-  request.get('/news/selectTopNews?sort=bew').then(res => {
-    console.log(res)
-  })
-}
+
 
 </script>
 
