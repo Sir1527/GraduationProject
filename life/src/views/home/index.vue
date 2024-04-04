@@ -304,8 +304,6 @@ const getTableData = async () => {
   console.log(newsData.total)
 }
 onMounted(() => getTableData());
-console.log(newsData.total)
-
 
 const activityList = ref([
   {
