@@ -35,12 +35,7 @@
       </li>
       <li>
         <a-tooltip
-            :content="
-            isFullscreen
-              ? '点击退出全屏模式'
-              : '点击切换全屏模式'
-          "
-        >
+            :content="isFullscreen ? '点击退出全屏模式': '点击切换全屏模式' ">
           <a-button
               class="nav-btn"
               type="outline"
@@ -54,6 +49,37 @@
           </a-button>
         </a-tooltip>
       </li>
+      <li>
+        <a-dropdown trigger="click" v-if="isLogin" @click="a">
+          <a-avatar
+              :size="32"
+              :style="{ marginRight: '8px', cursor: 'pointer' }"
+          >
+            <img alt="avatar" src="" />
+          </a-avatar>
+          <template #content>
+            <a-doption>
+              <a-space>
+                <icon-tag />
+                <span>
+                  aaa
+                </span>
+              </a-space>
+            </a-doption>
+            <a-doption>
+              <a-space @click="$router.push({ name: 'Info' })">
+                <icon-user />
+                <span>
+
+                </span>
+              </a-space>
+            </a-doption>
+          </template>
+        </a-dropdown>
+        <div v-else @click="a">
+          登录
+        </div>
+      </li>
     </ul>
   </div>
 </template>
@@ -62,8 +88,9 @@
 import Menu from '@/components/menu/index.vue';
 
 import {useAppStore} from "@/stores";
-import {computed} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import {useDark, useFullscreen, useToggle} from "@vueuse/core";
+import {getToken} from "@/utils/auth";
 
 const appStore = useAppStore();
 
@@ -88,6 +115,13 @@ const toggleTheme = useToggle(isDark);
 const handleToggleTheme = () => {
   toggleTheme();
 }
+
+const isLogin = ref(false);
+
+const a = () => {
+  isLogin.value = !isLogin.value;
+}
+
 </script>
 
 <style scoped lang="less">

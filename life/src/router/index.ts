@@ -21,7 +21,8 @@ const router = createRouter({
           path: '/home',
           component: Home,
           meta: {
-            title: '首页'
+            title: '首页',
+            order: 1,
           }
         },
         {
@@ -72,7 +73,7 @@ export const notFoundRouter = {
 
 router.beforeEach(async (to, from,next) => {
   const token = getToken();
-  if (token === null && to.path !== '/login' && to.path !== '/register'){
+  if (token === null && to.path !== '/login' && to.path !== '/register' && to.path !== '/home'){
     next('/login')
   }else {
     next();

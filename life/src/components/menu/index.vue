@@ -11,13 +11,7 @@
 </template>
 
 <script setup lang="ts">
-  import {getNewsTopListAPI} from "@/api/news";
-  import {onMounted} from "vue";
 
-  const api = async () => {
-    await getNewsTopListAPI("")
-  }
-  onMounted(api)
 </script>
 
 <style scoped lang="less">
