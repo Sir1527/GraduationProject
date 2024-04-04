@@ -34,7 +34,7 @@
         <if test="sort == 'new'">id</if>
         <if test="sort == 'hot'">count</if>
         desc
-        limit 8
+        limit 7
     </select>
 
     <delete id="deleteById">
