@@ -50,7 +50,7 @@
         </a-tooltip>
       </li>
       <li>
-        <a-dropdown trigger="click" v-if="isLogin" @click="a">
+        <a-dropdown trigger="click" v-if="isLoginUser" @click="a">
           <a-avatar
               :size="32"
               :style="{ marginRight: '8px', cursor: 'pointer' }"
@@ -76,7 +76,7 @@
             </a-doption>
           </template>
         </a-dropdown>
-        <div v-else @click="a">
+        <div v-else  @click="$router.push('/login')">
           登录
         </div>
       </li>
@@ -90,6 +90,7 @@ import Menu from '@/components/menu/index.vue';
 import {useAppStore} from "@/store";
 import {computed, ref} from "vue";
 import {useDark, useFullscreen, useToggle} from "@vueuse/core";
+import {isLogin} from "@/utils/auth";
 
 // const appStore = useAppStore();
 const appStore = useAppStore();
@@ -116,10 +117,10 @@ const handleToggleTheme = () => {
   toggleTheme();
 }
 
-const isLogin = ref(false);
+const isLoginUser = isLogin();
 
 const a = () => {
-  isLogin.value = !isLogin.value;
+
 }
 
 </script>
