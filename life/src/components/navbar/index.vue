@@ -87,11 +87,11 @@
 <script lang="ts" setup>
 import Menu from '@/components/menu/index.vue';
 
-import {useAppStore} from "@/stores";
-import {computed, onMounted, ref, watch} from "vue";
+import {useAppStore} from "@/store";
+import {computed, ref} from "vue";
 import {useDark, useFullscreen, useToggle} from "@vueuse/core";
-import {getToken} from "@/utils/auth";
 
+// const appStore = useAppStore();
 const appStore = useAppStore();
 
 const { isFullscreen, toggle: toggleFullScreen } = useFullscreen();

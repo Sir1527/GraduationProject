@@ -7,6 +7,6 @@ export interface UserState {
     avatar?: string;
     phone?: string;
     email?: string;
-    token?: string;
-    role: RoleType;
+    token: string | null;
+    role?: RoleType;
 }

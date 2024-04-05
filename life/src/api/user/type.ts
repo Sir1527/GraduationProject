@@ -11,7 +11,7 @@ export interface UserData {
     role?: string,
     newPassword?: string,
     avatar?: string,
-    toke?: string,
+    token?: string,
     phone?: string,
     email?: string
 }
