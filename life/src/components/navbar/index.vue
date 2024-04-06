@@ -50,7 +50,7 @@
         </a-tooltip>
       </li>
       <li>
-        <a-dropdown trigger="click" v-if="isLoginUser" @click="a">
+        <a-dropdown trigger="click" v-if="isLoginUser">
           <a-avatar
               :size="32"
               :style="{ marginRight: '8px', cursor: 'pointer' }"
@@ -60,17 +60,17 @@
           <template #content>
             <a-doption>
               <a-space>
-                <icon-tag />
+                <icon-user />
                 <span>
-                  aaa
+                  我的资料
                 </span>
               </a-space>
             </a-doption>
-            <a-doption>
-              <a-space @click="$router.push({ name: 'Info' })">
-                <icon-user />
+            <a-doption @click="handleLogout">
+              <a-space >
+                <icon-export />
                 <span>
-
+                  退出登录
                 </span>
               </a-space>
             </a-doption>
@@ -90,9 +90,9 @@ import Menu from '@/components/menu/index.vue';
 import {useAppStore} from "@/store";
 import {computed, ref} from "vue";
 import {useDark, useFullscreen, useToggle} from "@vueuse/core";
-import {isLogin} from "@/utils/auth";
+import {clearToken, getToken, isLogin} from "@/utils/auth";
+import router from "@/router";
 
-// const appStore = useAppStore();
 const appStore = useAppStore();
 
 const { isFullscreen, toggle: toggleFullScreen } = useFullscreen();
@@ -117,12 +117,15 @@ const handleToggleTheme = () => {
   toggleTheme();
 }
 
-const isLoginUser = isLogin();
+const isLoginUser = ref(false);
+isLoginUser.value = isLogin();
 
-const a = () => {
-
+const handleLogout = () => {
+  clearToken();
+  console.log("方法是否执行")
+  isLoginUser.value = isLogin();
+  console.log(getToken())
 }
-
 </script>
 
 <style scoped lang="less">
