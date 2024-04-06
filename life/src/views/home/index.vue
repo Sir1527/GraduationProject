@@ -25,8 +25,11 @@
                 style="display: flex; grid-gap: 10px; margin: 10px 0; cursor: pointer; padding-top: 2px">
                 <div
                   style="flex: 1; width: 0;margin: 1px 0;font-size: 15px; white-space: nowrap;overflow: hidden; text-overflow: ellipsis;">
-                  {{ item.title }}</div>
-                <div style="color: #666; font-size: 13px;padding-top: 0;margin: 1px 0;">{{ item.time }}</div>
+                  {{ item.title }}
+                </div>
+                <div style="color: #666; font-size: 13px;padding-top: 0;margin: 1px 0;">
+                  {{ item.time }}
+                </div>
               </div>
             </div>
           </div>
@@ -79,7 +82,7 @@
         <a-card :body-style="{ padding: '12px 0' }" :bordered="false" :header-style="{ padding: '30px 10px' }"
           title="公益活动">
           <template #extra>
-            <a-link @click="test">查看更多</a-link>
+            <a-link>查看更多</a-link>
           </template>
           <a-list :bordered="false">
 
@@ -211,32 +214,20 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from "vue";
-import { getNewsTopListAPI, getTableDateAPI } from "@/api/news";
-import { reqLogin } from "@/api/user/user";
-import type { LoginFormData, RespUserData, UserData } from "@/api/user/type";
+import {getTableDateAPI, reqNewsTopList} from "@/api/news/news";
+import type {newsData, RespNewsData} from "@/api/news/type";
 
 const images = [
   '../src/assets/carousel/1.png',
   '../src/assets/carousel/2.png',
 ];
 
-const topNews = ref([
-  {
-    id: '',
-    title: '',
-    time: '',
-  }
-]);
+const topNews = ref();
 const getNewsTopList = async (sort: string) => {
-  const res = await getNewsTopListAPI(sort)
-  topNews.value = res.data;
+  const res:RespNewsData = await reqNewsTopList(sort);
+  topNews.value = res.data
 }
-onMounted(() => getNewsTopList('new'));
-
-
-const categoryData = ref([
-  { id: '', name: '' }
-])
+onMounted(() => getNewsTopList('new'))
 
 interface TableData {
   pageNum?: number,
@@ -244,11 +235,9 @@ interface TableData {
   total?: number,
   list?: Array<[]>;
 }
-
 const newsData: TableData = reactive({
 
 })
-
 const paginationProps = reactive({
   defaultPageSize: 4,
   total: newsData.total,
@@ -265,25 +254,17 @@ const getTableData = async () => {
   console.log(newsData.total)
 }
 onMounted(() => getTableData());
-
-const activityList = ref([
+ref([
   {
     id: 1,
     name: '志愿服务树时代新风雷锋精'
   }
 ]);
-
-const userL: LoginFormData = reactive({
+reactive({
   username: 'aaa',
   password: '123',
   role: 'USER'
-})
-const test = async() => {
-  const res:RespUserData = await reqLogin(userL);
-  console.log(res.data?.token);
-  
-}
-
+});
 </script>
 
 <style lang="less" scoped>
