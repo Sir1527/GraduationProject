@@ -3,9 +3,10 @@ import Layout from "@/layout/default-layout.vue";
 import Home from "@/views/home/index.vue";
 import Login from "@/views/login/index.vue";
 import Register from "@/views/register/index.vue";
-import Activity from "@/views/activity/index.vue"
-import Community from "@/views/community/index.vue"
-import Health from "@/views/health/index.vue"
+import Activity from "@/views/activity/index.vue";
+import Community from "@/views/community/index.vue";
+import Health from "@/views/health/index.vue";
+import newsDetail from '@/views/newsDetail/index.vue';
 
 import {getToken} from "@/utils/auth";
 
@@ -44,7 +45,14 @@ const router = createRouter({
           path: '/health',
           component: Health,
           meta: {
-            title: '社区'
+            title: '健康'
+          }
+        },
+        {
+          path: '/newsDetail',
+          component: newsDetail,
+          meta: {
+            title: '健康'
           }
         },
       ],
