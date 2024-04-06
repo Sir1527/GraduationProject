@@ -91,7 +91,6 @@ import {useAppStore} from "@/store";
 import {computed, ref} from "vue";
 import {useDark, useFullscreen, useToggle} from "@vueuse/core";
 import {clearToken, getToken, isLogin} from "@/utils/auth";
-import router from "@/router";
 
 const appStore = useAppStore();
 

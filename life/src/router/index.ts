@@ -16,6 +16,7 @@ const router = createRouter({
     {
       path: '/',
       component: Layout,
+      redirect: '/home',
       children: [
         {
           path: '/home',
@@ -46,7 +47,7 @@ const router = createRouter({
             title: '社区'
           }
         },
-      ]
+      ],
     },
     {
       path: '/login',
@@ -62,14 +63,14 @@ const router = createRouter({
         title: '登陆'
       }
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('@/views/not-found/index.vue')
+    },
   ]
 })
 
-export const notFoundRouter = {
-  path: '/:pathMatch(.*)*',
-  name: 'notFound',
-  redirect: '404',
-}
 
 router.beforeEach(async (to, from,next) => {
   const token = getToken();
@@ -79,5 +80,4 @@ router.beforeEach(async (to, from,next) => {
     next();
   }
 })
-
 export default router

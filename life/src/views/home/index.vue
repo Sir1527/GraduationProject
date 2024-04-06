@@ -88,7 +88,7 @@
 
             <a-list-item action-layout="vertical">
               <a-list-item-meta action-layout="vertical" title="志愿服务树时代新风雷锋精神放璀璨光芒">
-                <template #actions>
+                <template>
                   <span><icon-heart />83</span>
                   <span><icon-star />1</span>
                   <span><icon-message />Reply</span>
@@ -109,7 +109,7 @@
             </a-list-item>
             <a-list-item action-layout="vertical">
               <a-list-item-meta action-layout="vertical" title="【爷爷奶奶的新年礼物】——“边陲暖心行情系夕阳红”">
-                <template #actions>
+                <template>
                   <span><icon-heart />83</span>
                   <span><icon-star />1</span>
                   <span><icon-message />Reply</span>
@@ -130,7 +130,7 @@
             </a-list-item>
             <a-list-item action-layout="vertical">
               <a-list-item-meta action-layout="vertical" title="冬病夏治”麻布社区健康知识科普活动">
-                <template #actions>
+                <template>
                   <span><icon-heart />83</span>
                   <span><icon-star />1</span>
                   <span><icon-message />Reply</span>
@@ -151,7 +151,7 @@
             </a-list-item>
             <a-list-item action-layout="vertical">
               <a-list-item-meta action-layout="vertical" title="支部结对聚合力 携手共建保健康">
-                <template #actions>
+                <template>
                   <span><icon-heart />83</span>
                   <span><icon-star />1</span>
                   <span><icon-message />Reply</span>
@@ -213,9 +213,9 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from "vue";
+import {onMounted, reactive, ref} from "vue";
 import {getTableDateAPI, reqNewsTopList} from "@/api/news/news";
-import type {newsData, RespNewsData} from "@/api/news/type";
+import type {newsData, RespNewsTopData} from "@/api/news/type";
 
 const images = [
   '../src/assets/carousel/1.png',
@@ -224,10 +224,12 @@ const images = [
 
 const topNews = ref();
 const getNewsTopList = async (sort: string) => {
-  const res:RespNewsData = await reqNewsTopList(sort);
+  const res:RespNewsTopData = await reqNewsTopList(sort);
   topNews.value = res.data
 }
 onMounted(() => getNewsTopList('new'))
+
+
 
 interface TableData {
   pageNum?: number,
@@ -235,9 +237,8 @@ interface TableData {
   total?: number,
   list?: Array<[]>;
 }
-const newsData: TableData = reactive({
 
-})
+const newsData:TableData = reactive({})
 const paginationProps = reactive({
   defaultPageSize: 4,
   total: newsData.total,
@@ -247,30 +248,34 @@ const getTableData = async () => {
   console.log(res)
   newsData.total = res.data.total;
   newsData.pageSize = res.data.pageSize;
-  newsData.pageNum = res.data.pageNum;
+  newsData.pageNum =res.data.pageNum;
   newsData.list = res.data.list
   paginationProps.total = newsData.total;
   console.log(newsData)
   console.log(newsData.total)
 }
 onMounted(() => getTableData());
-ref([
-  {
-    id: 1,
-    name: '志愿服务树时代新风雷锋精'
-  }
-]);
-reactive({
-  username: 'aaa',
-  password: '123',
-  role: 'USER'
-});
+
+
+// const newsData = ref();
+// const newsDataList = ref();
+// const paginationProps = reactive({
+//   defaultPageSize: 4,
+//   total: newsData.value.data.total
+// })
+// const getTableData = async () => {
+//   newsData.value = await reqNewsTableDate();
+//   newsDataList.value = newsData.value.data.list;
+//   console.log(newsDataList.value)
+// }
+// onMounted(() => getTableData());
+
+
 </script>
 
 <style lang="less" scoped>
 .container {
-  padding: 16px 20px;
-  padding-bottom: 0;
+  padding: 16px 0 20px 0;
 }
 
 .general-card {
@@ -299,18 +304,4 @@ reactive({
   margin: 0 4px;
 }
 
-.category-active {
-  border: none;
-  background-color: #2A60C9;
-  color: #fff;
-}
-
-
-.category-item {
-  padding: 5px 10px;
-  border: 1px solid #333;
-  border-radius: 5px;
-  margin-right: 10px;
-  cursor: pointer;
-}
 </style>
