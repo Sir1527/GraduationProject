@@ -5,40 +5,42 @@
       <div class="main-content">
         <div style="margin-bottom: 20px; font-size: 22px; font-weight: bold; text-align: center">
           <a-typography-title :heading="2">
-            【最新】2023年杭州高龄老人生活津贴标准调整啦
+           {{ news.title }}
           </a-typography-title>
         </div>
 
         <div style="color: #666; text-align: center">
-          <span style="margin-right: 20px">发布时间：2023-12-28 22:00:14</span>
-          <span>浏览量：<span style="color: red">13</span></span>
+          <span style="margin-right: 20px">发布时间：{{ news.time }}</span>
+          <span>浏览量：<span style="color: red">{{ news.count }}</span></span>
         </div>
         <div style="margin: 30px 0; padding: 0 20px">
           <div class="w-e-text" style="line-height: 26px; text-indent: 2rem">
             <div>
-              <p>冬至不端饺子碗，冻掉耳朵没人管。</p>
-              <p>老话说“冬至大如年”，按照北方的传统，冬至是必须要吃饺子的！这不仅是一种文化习俗的传承，也是一种颇有仪式感的情感表达。</p>
-              <p><a href="https://www.yanglaocn.com/images/upload/img/2023/12_25/5a589c5b30d83a46c918f18a05b21f80.jpg" target="_blank">
-                <img alt="冬至吃饺子，九九养老•玖悦颐养中心陪你过一个温暖的节日！" src="https://www.yanglaocn.com/images/upload/img/2023/12_25/5a589c5b30d83a46c918f18a05b21f80.jpg"/>
-              </a></p>
-              <p>饺子形如元宝，是福气和财源的象征，另一方面在包饺子的时候全家齐上阵，热热闹闹，也是团圆幸福的象征。所以每到冬至吃饺子就是北方人的执念。</p>
-              <p><a href="https://www.yanglaocn.com/images/upload/img/2023/12_25/0202042d28006ced34aa094c3245c7c8.jpg" target="_blank">
-                <img alt="冬至吃饺子，九九养老•玖悦颐养中心陪你过一个温暖的节日！" src="https://www.yanglaocn.com/images/upload/img/2023/12_25/0202042d28006ced34aa094c3245c7c8.jpg"/></a></p>
-              <p><a href="https://www.yanglaocn.com/images/upload/img/2023/12_25/1d856c10d9f79a53c726a5a75aa09433.jpg" target="_blank"><img alt="冬至吃饺子，九九养老•玖悦颐养中心陪你过一个温暖的节日！" src="https://www.yanglaocn.com/images/upload/img/2023/12_25/1d856c10d9f79a53c726a5a75aa09433.jpg"/></a>
-              </p><p>冬至这天，高新区社会事业服务局和锦业路社区的志愿者们来到<a href="https://www.yanglaocn.com/ylyxx/y25606.html" target="_blank">高新区丈八街道综合养老服务中心（玖悦颐养中心）</a>，和长者们一起包饺子。</p><p>厨房已经帮大家准备好食材，长者和志愿者们相互配合、分工合作，擀皮、包馅，共享厨房里欢笑声、交谈声、锅碗瓢盆的撞击声交织在一起，气氛欢乐融洽、热闹非凡。</p><p><a href="https://www.yanglaocn.com/images/upload/img/2023/12_25/d438be80250eac54bcea57993dbf62bb.jpg" target="_blank"><img alt="冬至吃饺子，九九养老•玖悦颐养中心陪你过一个温暖的节日！" src="https://www.yanglaocn.com/images/upload/img/2023/12_25/d438be80250eac54bcea57993dbf62bb.jpg"/></a></p>
-              <p><a href="https://www.yanglaocn.com/images/upload/img/2023/12_25/dc4cdad8dff7067a82e82f1b09550618.jpg" target="_blank"><img alt="冬至吃饺子，九九养老•玖悦颐养中心陪你过一个温暖的节日！" src="https://www.yanglaocn.com/images/upload/img/2023/12_25/dc4cdad8dff7067a82e82f1b09550618.jpg"/></a></p><p><a href="https://www.yanglaocn.com/images/upload/img/2023/12_25/6023c911b60af313370a4a9c0131ed4e.jpg" target="_blank"><img alt="冬至吃饺子，九九养老•玖悦颐养中心陪你过一个温暖的节日！" src="https://www.yanglaocn.com/images/upload/img/2023/12_25/6023c911b60af313370a4a9c0131ed4e.jpg"/></a></p><p>人多力量大，很快就成果颇丰，花样繁多、充满创意的饺子摆满了餐盘，有扇形的、元宝形的、花形的……看着自己包的饺子，长者们脸上露出了笑容。</p>
-              <p><a href="https://www.yanglaocn.com/images/upload/img/2023/12_25/8f2fbf06667d433babb4337fd108df47.jpg" target="_blank"><img alt="冬至吃饺子，九九养老•玖悦颐养中心陪你过一个温暖的节日！" src="https://www.yanglaocn.com/images/upload/img/2023/12_25/8f2fbf06667d433babb4337fd108df47.jpg"/></a></p><p><a href="https://www.yanglaocn.com/images/upload/img/2023/12_25/2675f393142789c07c65dcf8d84fa8c2.jpg" target="_blank"><img alt="冬至吃饺子，九九养老•玖悦颐养中心陪你过一个温暖的节日！" src="https://www.yanglaocn.com/images/upload/img/2023/12_25/2675f393142789c07c65dcf8d84fa8c2.jpg"/></a></p><p>当热气腾腾的饺子呈现在大家眼前，喜悦之情洋溢在每个人的脸上。大家品尝着自己亲手包的饺子，享受着这份香甜与美味。</p><p><a href="https://www.yanglaocn.com/images/upload/img/2023/12_25/2ae16807015552b0a792524a123b5503.jpg" target="_blank"><img alt="冬至吃饺子，九九养老•玖悦颐养中心陪你过一个温暖的节日！" src="https://www.yanglaocn.com/images/upload/img/2023/12_25/2ae16807015552b0a792524a123b5503.jpg"/></a></p><p><a href="https://www.yanglaocn.com/images/upload/img/2023/12_25/f786d44ee3ef52f2f65d562458660c10.jpg" target="_blank"><img alt="冬至吃饺子，九九养老•玖悦颐养中心陪你过一个温暖的节日！" src="https://www.yanglaocn.com/images/upload/img/2023/12_25/f786d44ee3ef52f2f65d562458660c10.jpg"/></a></p><p>为了讨个好彩头，长者们在饺子中还放入红枣、紫薯等馅料，包成幸运甜饺子，吃到这个甜饺子的人运气是非同一般的，寓意新的一年生活甜蜜蜜。</p>
-              <p>人间小团圆，冬至大如年。小小的饺子，包进去的是情感，吃出来的是幸福。</p>
+              <div v-html="news.content"></div>
             </div>
           </div>
         </div>
       </div>
     </a-card>
+
   </div>
 
 </template>
 
 <script setup lang="ts">
+
+import {reactive} from "vue";
+
+const news = reactive({
+  id:'9',
+  title: '特困老人的“温暖使者',
+  descr: '记沭阳县贤官镇敬老院院长杨光来',
+  content: '<p style=\\"text-align:left;\\">情暖寒冬，关爱老人。为进一步弘扬尊老、敬老、爱老的传统美德，做好老年人医疗服务，传播健康理念，12月26日，省市卫健领导、济南市医养健康产业协会“暖冬敬老”系列活动走进历城区养老服务中心。山东省卫生健康委中医产业处处长王萱、济南市卫生健康委医养健康处二级调研员王芝美、历城区卫健局、济南市第三人民医院及等协会相关领导等参加活动。现场举行了“暖冬敬老”慰问捐赠仪式、开展了老年营养保健讲座及市立三院的公益诊疗活动。</p><p><br/></p><p style=\\"text-align:center;\\"><a href=\\"https://www.yanglaocn.com/images/upload/img/2023/12_27/385e9b0762a44d5ff68aeb75e9bc8b41.jpg\\" target=\\"_blank\\"><img alt=\\"市卫生健康委领导参观历城区养老服务中心，肯定医养结合服务内容\\" src=\\"https://www.yanglaocn.com/images/upload/img/2023/12_27/385e9b0762a44d5ff68aeb75e9bc8b41.jpg\\"/></a></p><p style=\\"text-align:left;\\"><br/></p><p style=\\"text-align:left;\\">领导一行参观了养老中心各功能区域，深入了解了中心医疗保健、康复护理、中医理疗、认知照护等医养结合服务内容，并对中心医疗设施设备及专业化服务给予充分肯定。</p><p><br/></p><p style=\\"text-align:center;\\"><a href=\\"https://www.yanglaocn.com/images/upload/img/2023/12_27/9ae65ee1a52ec263b44b1fdb2bd64bd5.jpg\\" target=\\"_blank\\"><img alt=\\"市卫生健康委领导参观历城区养老服务中心，肯定医养结合服务内容\\" src=\\"https://www.yanglaocn.com/images/upload/img/2023/12_27/9ae65ee1a52ec263b44b1fdb2bd64bd5.jpg\\"/></a></p><p style=\\"text-align:left;\\"><br/></p><p style=\\"text-align:left;\\">参观结束在中心举行“暖冬敬老”慰问捐赠仪式，山东省卫生健康委中医产业处给养老中心赠送了老年人营养膳食指南等书籍，协会为中心长者送来米面粮油等生活物资，不仅强化了入住老人的物质生活保障，更丰富了长者的精神文化生活。</p><p><br/></p><p style=\\"text-align:center;\\"><a href=\\"https://www.yanglaocn.com/images/upload/img/2023/12_27/9d0adada38674523476037b919b6fb3d.jpg\\" target=\\"_blank\\"><img alt=\\"市卫生健康委领导参观历城区养老服务中心，肯定医养结合服务内容\\" src=\\"https://www.yanglaocn.com/images/upload/img/2023/12_27/9d0adada38674523476037b919b6fb3d.jpg\\"/></a></p><p style=\\"text-align:left;\\"><br/></p><p style=\\"text-align:left;\\">“暖冬敬老”活动现场，济南市第三人民医院副主任医师杨其军为中心在住长者带来老年营养保健讲座，现场普及营养与健康知识，有效增强老年人的健康意识和自我保健能力，养成健康、文明、科学的生活习惯，预防和延缓疾病的发生和发展，提升生命质量。</p><p><br/></p><p style=\\"text-align:center;\\"><a href=\\"https://www.yanglaocn.com/images/upload/img/2023/12_27/5ceeeec97d0141bb41e769df8532318b.jpg\\" target=\\"_blank\\"><img alt=\\"市卫生健康委领导参观历城区养老服务中心，肯定医养结合服务内容\\" src=\\"https://www.yanglaocn.com/images/upload/img/2023/12_27/5ceeeec97d0141bb41e769df8532318b.jpg\\"/></a></p><p style=\\"text-align:left;\\"><br/></p><p style=\\"text-align:left;\\">市立三院为中心长者提供义诊服务，心血管内科、神经外科、脊柱外科、心血管内科、泌尿外科、中医科等科室医师现场为长者们进行了生命体征测量等医疗诊断服务，并将移动医疗车开进养老中心，给老人做CT、B超检查，耐心倾听长者各类问题，给予专业的建议和解答，受到中心长者们的一致欢迎。</p><p><br/></p><p style=\\"text-align:center;\\"><a href=\\"https://www.yanglaocn.com/images/upload/img/2023/12_27/8f45ff5fae34b96c43f554147ee6b975.jpg\\" target=\\"_blank\\"><img alt=\\"市卫生健康委领导参观历城区养老服务中心，肯定医养结合服务内容\\" src=\\"https://www.yanglaocn.com/images/upload/img/2023/12_27/8f45ff5fae34b96c43f554147ee6b975.jpg\\"/></a></p><p style=\\"text-align:center;\\"><a href=\\"https://www.yanglaocn.com/images/upload/img/2023/12_27/26a675fd016e44ef3e6d024a81d6f58b.jpg\\" target=\\"_blank\\"><img alt=\\"市卫生健康委领导参观历城区养老服务中心，肯定医养结合服务内容\\" src=\\"https://www.yanglaocn.com/images/upload/img/2023/12_27/26a675fd016e44ef3e6d024a81d6f58b.jpg\\"/></a></p><p style=\\"text-align:left;\\"><br/></p><p style=\\"text-align:left;\\">此次“暖冬敬老”活动是济南市医养健康产业协会各级领导关心关注老年群体、践行爱老初心的有力实践。历城区养老服务中心负责人表示，中心将用优质的医养结合专业服务，让入住长者老有所养、老有所医，为在住长者持续打造高品质晚年生活。</p><p><br/></p><p style=\\"text-align:center;\\"><a href=\\"https://www.yanglaocn.com/images/upload/img/2023/12_27/8799a30e1062421e00e2bae5f634bfbc.jpg\\" target=\\"_blank\\"><img alt="市卫生健康委领导参观历城区养老服务中心，肯定医养结合服务内容" src="https://www.yanglaocn.com/images/upload/img/2023/12_27/8799a30e1062421e00e2bae5f634bfbc.jpg"/></a></p><p style=\\"text-align:center;\\"><a href=\\"https://www.yanglaocn.com/images/upload/img/2023/12_13/885e29bf31d55a7065303bc7dff2f2c3.png\\" target=\\"_blank\\"><img src="https://www.yanglaocn.com/images/upload/img/2023/12_13/885e29bf31d55a7065303bc7dff2f2c3.png"/></a></p>',
+  cover: 'https:\\/\\/dfzximg02.dftoutiao.com\\/news\\/20240329\\/20240329113829_9a09b02696dd43558367fddff1fa5ad8_1_mwpm_03201609.jpeg',
+  time: '2023-12-29 16:28:55',
+  count: '245',
+  category: '养老动态'
+})
 
 </script>
 

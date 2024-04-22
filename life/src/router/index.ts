@@ -83,6 +83,7 @@ const router = createRouter({
 router.beforeEach(async (to, from,next) => {
   const token = getToken();
   if (token === null && to.path !== '/login' && to.path !== '/register' && to.path !== '/home'){
+    alert("请先登陆！")
     next('/login')
   }else {
     next();

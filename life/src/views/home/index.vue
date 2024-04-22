@@ -55,14 +55,14 @@
             :pagination-props="paginationProps">
             <template #item="{ item }">
               <a-list-item class="list-demo-item" action-layout="vertical">
-                <template #actions>
-                  <div style="display: flex">
+                <template #actions style="justify-content: flex-end;">
+                  <div>
                     <span style="margin-right: 5px"><icon-clock-circle />{{ item.time }}</span>
                     <span><icon-eye />{{ item.count }}</span>
                   </div>
                 </template>
                 <template #extra>
-                  <div className="image-area">
+                  <div className="image-area" style="height: 98px">
                     <img alt="arco-design" :src=item.cover />
                   </div>
                 </template>
@@ -85,7 +85,22 @@
             <a-link>查看更多</a-link>
           </template>
           <a-list :bordered="false">
+            <a-list-item action-layout="vertical">
+              <a-list-item-meta action-layout="vertical" title="志愿服务树时代新风雷锋精神放璀璨光芒">
+                <template>
+                  <span><icon-heart />83</span>
+                  <span><icon-star />1</span>
+                  <span><icon-message />Reply</span>
+                </template>
+                <template #avatar>
+                  <a-avatar shape="square">
+                    <img alt="avatar"
+                         src="https://dfzximg02.dftoutiao.com\/news\/20240329\/20240329134855_01ef0f6fb366a2cc9e1a7c07e4bddf6a_1_mwpm_03201609.jpeg" />
+                  </a-avatar>
+                </template>
 
+              </a-list-item-meta>
+            </a-list-item>
             <a-list-item action-layout="vertical">
               <a-list-item-meta action-layout="vertical" title="志愿服务树时代新风雷锋精神放璀璨光芒">
                 <template>
@@ -101,11 +116,6 @@
                 </template>
 
               </a-list-item-meta>
-              <template #actions>
-                <span style="margin-left: 180px"><icon-clock-circle />
-                  2024-01-10
-                </span>
-              </template>
             </a-list-item>
             <a-list-item action-layout="vertical">
               <a-list-item-meta action-layout="vertical" title="【爷爷奶奶的新年礼物】——“边陲暖心行情系夕阳红”">
@@ -122,11 +132,6 @@
                 </template>
 
               </a-list-item-meta>
-              <template #actions>
-                <span style="margin-left: 180px"><icon-clock-circle />
-                  2024-01-30
-                </span>
-              </template>
             </a-list-item>
             <a-list-item action-layout="vertical">
               <a-list-item-meta action-layout="vertical" title="冬病夏治”麻布社区健康知识科普活动">
@@ -143,11 +148,6 @@
                 </template>
 
               </a-list-item-meta>
-              <template #actions>
-                <span style="margin-left: 180px"><icon-clock-circle />
-                  2023-12-29
-                </span>
-              </template>
             </a-list-item>
             <a-list-item action-layout="vertical">
               <a-list-item-meta action-layout="vertical" title="支部结对聚合力 携手共建保健康">
@@ -165,9 +165,6 @@
 
               </a-list-item-meta>
               <template #actions>
-                <span style="margin-left: 180px"><icon-clock-circle />
-                  2023-12-01
-                </span>
               </template>
             </a-list-item>
             <a-list-item action-layout="vertical">
@@ -181,9 +178,6 @@
 
               </a-list-item-meta>
               <template #actions>
-                <span style="margin-left: 180px"><icon-clock-circle />
-                  2023-12-29
-                </span>
               </template>
             </a-list-item>
             <a-list-item action-layout="vertical">
@@ -196,11 +190,6 @@
                 </template>
 
               </a-list-item-meta>
-              <template #actions>
-                <span style="margin-left: 180px"><icon-clock-circle />
-                  2023-12-01
-                </span>
-              </template>
             </a-list-item>
 
           </a-list>
@@ -214,8 +203,9 @@
 
 <script setup lang="ts">
 import {onMounted, reactive, ref} from "vue";
-import {getTableDateAPI, reqNewsTopList} from "@/api/news/news";
+import {getTableDateAPI, reqCategoryNews, reqNewsTableDate, reqNewsTopList} from "@/api/news/news";
 import type {newsData, RespNewsTopData} from "@/api/news/type";
+import type {TableData} from "@arco-design/web-vue";
 
 const images = [
   '../src/assets/carousel/1.png',
@@ -229,14 +219,6 @@ const getNewsTopList = async (sort: string) => {
 }
 onMounted(() => getNewsTopList('new'))
 
-
-
-interface TableData {
-  pageNum?: number,
-  pageSize?: number,
-  total?: number,
-  list?: Array<[]>;
-}
 
 const newsData:TableData = reactive({})
 const paginationProps = reactive({
@@ -255,21 +237,6 @@ const getTableData = async () => {
   console.log(newsData.total)
 }
 onMounted(() => getTableData());
-
-
-// const newsData = ref();
-// const newsDataList = ref();
-// const paginationProps = reactive({
-//   defaultPageSize: 4,
-//   total: newsData.value.data.total
-// })
-// const getTableData = async () => {
-//   newsData.value = await reqNewsTableDate();
-//   newsDataList.value = newsData.value.data.list;
-//   console.log(newsDataList.value)
-// }
-// onMounted(() => getTableData());
-
 
 </script>
 

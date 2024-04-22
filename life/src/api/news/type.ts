@@ -9,6 +9,13 @@ export interface newsData {
     category?: string,
 }
 
+interface TableData {
+    pageNum?: number,
+    pageSize?: number,
+    total?: number,
+    list?: Array<[]>;
+}
+
 export interface RespNewsTopData {
     code?: string,
     msg? :string,
