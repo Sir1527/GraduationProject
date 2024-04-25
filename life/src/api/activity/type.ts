@@ -13,6 +13,12 @@ export interface activity {
 export interface respActivity {
     code?: string,
     msg?: string,
+    data?: activity
+}
+
+export interface respActivityList {
+    code?: string,
+    msg?: string,
     data?: {
         list: activity[],
         total: number

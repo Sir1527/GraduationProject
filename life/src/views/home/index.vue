@@ -14,7 +14,7 @@
       </a-grid-item>
 
       <a-grid-item :span="{ xs: 24, sm: 24, md: 24, lg: 12, xl: 12, xxl: 12 }">
-        <a-card :body-style="{ padding: '0 10px', height: '290px' }" :bordered="false">
+        <a-card :body-style="{ padding: '0 10px', height: '290px' }" :bordered="false" >
           <div style="padding: 0">
             <a-menu mode="horizontal" :default-selected-keys="['0']" style="margin: 0">
               <a-menu-item key="0" @click="getNewsTopList('new')">最新咨询</a-menu-item>

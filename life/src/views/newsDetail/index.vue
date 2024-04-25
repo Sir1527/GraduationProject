@@ -35,7 +35,7 @@
 <script setup lang="ts">
 
 import {onMounted, reactive} from "vue";
-import {getNews} from "@/api/news/news";
+import {getNews, reqNewsCount} from "@/api/news/news";
 import {useRoute} from "vue-router";
 import components from "@/components/comment/index.vue";
 import type {newsData} from "@/api/news/type";
@@ -45,6 +45,7 @@ const id: any = route.query.id;
 
 const news:newsData = reactive({})
 const reqNews = async(id: number) => {
+  updateCount();
   const res = await getNews(id);
   news.title = res.data?.title;
   news.time = res.data?.time;
@@ -53,6 +54,10 @@ const reqNews = async(id: number) => {
   news.category = res.data?.category;
 }
 onMounted(() => reqNews(id))
+
+const updateCount = () => {
+  reqNewsCount(id)
+}
 
 </script>
 

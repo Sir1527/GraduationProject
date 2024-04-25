@@ -2,7 +2,7 @@
   <div class="container">
     <a-grid :cols="{ xs: 12, sm: 12, md: 12, lg: 24, xl: 24, xxl: 24 }" :colGap="12" :rowGap="16" class="grid-demo-grid">
       <a-grid-item :span="{ xs: 8, sm: 8, md: 6, lg: 8, xl: 8, xxl: 8 }" v-for="(item,index) in activityList">
-        <a-card :style="{ width: '360px' }">
+        <a-card :style="{ width: '360px' }" @click="$router.push('/activityDetail?id=' + item.id)">
           <template #actions>
             <span class="icon-hover"> <icon-clock-circle /> {{ item.start }} - {{ item.end }}</span>
             <span class="icon-hover"> <IconShareInternal /> </span>
@@ -42,12 +42,10 @@ const activityList: activity | null | any = ref<activity>();
 const load = async () => {
   const res = await reqActivityList();
   activityList.value = res.data?.list;
-  console.log(activityList)
 }
 onMounted(() => load())
 
 const a = (num: number) => {
-  console.log(num)
 }
 </script>
 

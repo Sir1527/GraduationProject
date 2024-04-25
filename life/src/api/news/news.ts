@@ -26,3 +26,6 @@ export const reqCategoryNews = (category: string) =>
 
 export const getNews = (id: number) =>
     request.get<any,RespNews>(API.News_URL+id)
+
+export const reqNewsCount = (id: string) =>
+    request.put<any>('/news/updateCount/' + id)

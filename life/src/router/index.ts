@@ -6,7 +6,8 @@ import Register from "@/views/register/index.vue";
 import Activity from "@/views/activity/index.vue";
 import Community from "@/views/community/index.vue";
 import Health from "@/views/health/index.vue";
-import newsDetail from '@/views/newsDetail/index.vue';
+import NewsDetail from '@/views/newsDetail/index.vue';
+import ActivityDetail from "@/views/activityDetail/index.vue"
 
 import {getToken} from "@/utils/auth";
 
@@ -50,11 +51,18 @@ const router = createRouter({
         },
         {
           path: '/newsDetail',
-          component: newsDetail,
+          component: NewsDetail,
           meta: {
             title: '新闻详情'
           }
         },
+        {
+          path: '/activityDetail',
+          component: ActivityDetail,
+          meta: {
+            title: '活动详情'
+          }
+        }
       ],
     },
     {
