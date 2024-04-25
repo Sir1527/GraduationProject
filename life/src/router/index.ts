@@ -52,7 +52,7 @@ const router = createRouter({
           path: '/newsDetail',
           component: newsDetail,
           meta: {
-            title: '健康'
+            title: '新闻详情'
           }
         },
       ],

@@ -24,13 +24,11 @@ public class Comment implements Serializable {
     private Integer fid;
     /** 模块 */
     private String module;
-
     private String userName;
     private String avatar;
-
     private List<Comment> children;
-
     private String replyUser;
+
 
     public String getReplyUser() {
         return replyUser;

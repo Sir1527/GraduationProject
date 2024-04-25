@@ -9,11 +9,17 @@ export interface newsData {
     category?: string,
 }
 
-interface TableData {
+export interface TableData {
     pageNum?: number,
     pageSize?: number,
     total?: number,
     list?: Array<[]>;
+}
+
+export interface RespNews {
+    code?: string,
+    msg?: string,
+    data?: newsData,
 }
 
 export interface RespNewsTopData {

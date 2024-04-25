@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 
-import { setToken } from "@/utils/auth";
+import {setToken, setUserId} from "@/utils/auth";
 import type { LoginFormData, RespUserData } from "@/api/user/type";
 import { reqLogin } from "@/api/user/user";
 import {useUserStore} from "@/store";
@@ -64,10 +64,11 @@ import {useUserStore} from "@/store";
 const userStore = useUserStore();
 const form: LoginFormData = reactive({role: "USER"})
 
-const a = async () => {
+const login = async () => {
   const res: RespUserData = await reqLogin(form);
   if(res.code === '200') {
     const token = res.data?.token;
+    setUserId(String (res.data?.id))
     setToken(String (token));
     setTimeout( () => {
       location.href = '/home'
@@ -82,6 +83,6 @@ const loginU = async () => {
 }
 
 const handleSubmit = () => {
-  a()
+  login()
 }
 </script>

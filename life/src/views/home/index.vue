@@ -20,8 +20,8 @@
               <a-menu-item key="0" @click="getNewsTopList('new')">最新咨询</a-menu-item>
               <a-menu-item key="1" @click="getNewsTopList('hot')">最热咨询</a-menu-item>
             </a-menu>
-            <div style="padding: 0 10px">
-              <div v-for="item in topNews" :key="item.id"
+            <div style="padding: 0 10px" >
+              <div v-for="item in topNews" :key="item.id" @click="$router.push('/newsDetail?id=' + item.id)"
                 style="display: flex; grid-gap: 10px; margin: 10px 0; cursor: pointer; padding-top: 2px">
                 <div
                   style="flex: 1; width: 0;margin: 1px 0;font-size: 15px; white-space: nowrap;overflow: hidden; text-overflow: ellipsis;">
@@ -38,23 +38,16 @@
 
       <a-grid-item :span="{ xs: 24, sm: 24, md: 24, lg: 17, xl: 17, xxl: 17 }">
 
-        <a-menu mode="horizontal" :default-selected-keys="['0']">
-          <a-menu-item key="0">全部</a-menu-item>
-          <a-menu-item key="1">养老动态</a-menu-item>
-          <a-menu-item key="2">养老政策</a-menu-item>
-          <a-menu-item key="3">养老服务</a-menu-item>
-          <a-menu-item key="4">养老产业</a-menu-item>
-          <a-menu-item key="5">养老模式</a-menu-item>
-          <a-menu-item key="6">养老金</a-menu-item>
-          <a-menu-item key="7">居家养老</a-menu-item>
-        </a-menu>
-
         <a-card :body-style="{ padding: '0 0 15px 0', }" :bordered="false">
 
-          <a-list class="list-demo-action-layout" :bordered="false" :data="newsData.list"
-            :pagination-props="paginationProps">
+          <div style="display: flex; margin-bottom: 10px; margin-left: 10px; padding-top: 20px">
+            <div @click="loadCategoryNews('')" class="category-item" :class="{ 'category-active' : category === '' }">全部</div>
+            <div @click="loadCategoryNews(item.name)" class="category-item" :class="{ 'category-active' : item.name === category }" v-for="item in categoryList" :key="item.id">{{ item.name }}</div>
+          </div>
+
+          <a-list class="list-demo-action-layout" :bordered="false" :data="newsData.list" :pagination-props="paginationProps">
             <template #item="{ item }">
-              <a-list-item class="list-demo-item" action-layout="vertical">
+              <a-list-item class="list-demo-item" action-layout="vertical" @click="$router.push('/newsDetail?id=' + item.id)">
                 <template #actions style="justify-content: flex-end;">
                   <div>
                     <span style="margin-right: 5px"><icon-clock-circle />{{ item.time }}</span>
@@ -73,7 +66,6 @@
             </template>
           </a-list>
 
-
         </a-card>
       </a-grid-item>
 
@@ -82,7 +74,7 @@
         <a-card :body-style="{ padding: '12px 0' }" :bordered="false" :header-style="{ padding: '30px 10px' }"
           title="公益活动">
           <template #extra>
-            <a-link>查看更多</a-link>
+            <a-link href="http://localhost:5173/activity">查看更多</a-link>
           </template>
           <a-list :bordered="false">
             <a-list-item action-layout="vertical">
@@ -206,6 +198,8 @@ import {onMounted, reactive, ref} from "vue";
 import {getTableDateAPI, reqCategoryNews, reqNewsTableDate, reqNewsTopList} from "@/api/news/news";
 import type {newsData, RespNewsTopData} from "@/api/news/type";
 import type {TableData} from "@arco-design/web-vue";
+import request from "@/utils/http";
+import type {respCategory} from "@/api/category/type";
 
 const images = [
   '../src/assets/carousel/1.png',
@@ -227,16 +221,40 @@ const paginationProps = reactive({
 })
 const getTableData = async () => {
   const res = await getTableDateAPI();
-  console.log(res)
   newsData.total = res.data.total;
   newsData.pageSize = res.data.pageSize;
   newsData.pageNum =res.data.pageNum;
   newsData.list = res.data.list
   paginationProps.total = newsData.total;
-  console.log(newsData)
-  console.log(newsData.total)
 }
-onMounted(() => getTableData());
+
+let pageNum = ref(1);
+let  pageSize = ref(4);
+let category: any = ref('');
+const loadCategoryNews = (category_: string) => {
+  category.value = category_
+  if (category_ === ''){
+    getTableData();
+  } else {
+    request.get('/news/selectPage?category='+category_+'&pageSize=50').then(res => {
+      newsData.total = res.data.total;
+      newsData.pageSize = res.data.pageSize;
+      newsData.pageNum =res.data.pageNum;
+      newsData.list = res.data.list
+      paginationProps.total = newsData.total;
+    })
+  }
+}
+onMounted(() =>loadCategoryNews(''))
+
+const categoryList: any = ref([]);
+const loadCategory = () => {
+  request.get<respCategory>('/category/selectAll').then(res => {
+    categoryList.value = res.data;
+    console.log(categoryList.value)
+  })
+}
+onMounted(() => loadCategory())
 
 </script>
 
@@ -271,4 +289,18 @@ onMounted(() => getTableData());
   margin: 0 4px;
 }
 
+.category-item {
+  padding: 5px 10px;
+  //border: 1px solid #333;
+  font-size: 17px;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.category-active {
+  border: none;
+  background-color: #2A60C9;
+  color: #fff;
+}
 </style>
