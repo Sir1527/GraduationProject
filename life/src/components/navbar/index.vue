@@ -55,7 +55,7 @@
               :size="32"
               :style="{ marginRight: '8px', cursor: 'pointer' }"
           >
-            <img alt="avatar" src="" />
+            <img alt="avatar" :src=userImage />
           </a-avatar>
           <template #content>
             <a-doption>
@@ -88,9 +88,9 @@
 import Menu from '@/components/menu/index.vue';
 
 import {useAppStore} from "@/store";
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {useDark, useFullscreen, useToggle} from "@vueuse/core";
-import {clearToken, getToken, isLogin} from "@/utils/auth";
+import {clearToken, getToken, getUserAvatar, isLogin} from "@/utils/auth";
 
 const appStore = useAppStore();
 
@@ -125,6 +125,16 @@ const handleLogout = () => {
   isLoginUser.value = isLogin();
   console.log(getToken())
 }
+
+const userImage: string | any = ref('');
+const userAvatar = () => {
+  if (isLoginUser){
+    console.log(getUserAvatar())
+    userImage.value = getUserAvatar();
+  }
+}
+onMounted( () => userAvatar())
+
 </script>
 
 <style scoped lang="less">

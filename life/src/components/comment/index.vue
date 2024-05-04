@@ -11,7 +11,7 @@
 
       <div>
         <div v-for="item in commentList" :key="item.id" style="display: flex; grid-gap: 15px; margin-bottom: 20px">
-          <img :src="item.avatar" alt="" style="width: 50px; height: 50px; border-radius: 50%">
+          <a-image :src="item.avatar" alt="" fit="cover" width="50px" height="50px" style="border-radius: 50%"></a-image>
           <div style="flex: 1;">
             <div style="margin-bottom: 5px; color: #666">{{ item.userName }}</div>
             <div style="margin-bottom: 5px">{{ item.content }}</div>
@@ -33,7 +33,7 @@
 
             <div v-if="item.children.length">
               <div v-for="sub in item.children" :key="sub.id" style="display: flex; grid-gap: 15px; margin-bottom: 10px">
-                <img :src="sub.avatar" alt="" style="width: 50px; height: 50px; border-radius: 50%">
+                <a-image :src="item.avatar" alt="" fit="cover" width="50px" height="50px" style=" border-radius: 50%"></a-image>
                 <div style="flex: 1;">
                   <div style="margin-bottom: 5px; color: #666">{{ sub.userName }}  <span v-if="sub.replyUser && sub.replyUser !== item.userName">回复 {{ sub.replyUser }}</span></div>
                   <div style="margin-bottom: 5px">{{ sub.content }}</div>
@@ -76,13 +76,11 @@ const props = defineProps<Props>()
 const fid = props.fid;
 const module = props.module;
 
-const form:comment = reactive({
-});
+const form:comment = reactive({});
 const userId = getUserId();
 
 const del = (id: number) => {
   request.delete<any,respCommentCount>('comment/deepDelete/' + id).then(res => {
-    console.log(res)
     if (res.code === '200') {
       alert('操作成功')
       loadComment();
@@ -122,7 +120,6 @@ const loadComment = () => {
     })
     request.get('/comment/selectCount/' + fid + '/' + module).then(res => {
     commentCount.value = res.data || 0
-      console.log(res)
   })
 }
 onMounted(() => loadComment())

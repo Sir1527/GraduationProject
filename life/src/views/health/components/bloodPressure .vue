@@ -1,6 +1,17 @@
 <template>
   <div>
-    <div id="echarts1" ref="container" style="height: 500px;width: 500px;"></div>
+    <div style="font-size: 20px">
+      血压
+      <a-button  shape="circle" :style="{float: 'right',marginRight: '10px'}" >
+        <icon-plus />
+      </a-button>
+    </div>
+    <div>
+      <div style="height: 40px">
+
+      </div>
+    </div>
+    <div id="echarts1" ref="container" style="height: 500px;width: 550px;"></div>
   </div>
 
 
@@ -22,6 +33,8 @@ const Echarts = inject('$echarts');
 // 通过Vue全局注册方式获取
 // const {proxy}: any = getCurrentInstance();
 
+const data = ref([2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027])
+
 const colors = ['#5470C6', '#EE6666'];
 const initEchartsOneFn = () => {
   // echarts初始化
@@ -29,6 +42,7 @@ const initEchartsOneFn = () => {
 
   // 或
   // let myChart = proxy.$echarts.init(container.value);
+
 
   const option = {
     // 自定义echarts图标相关配置
@@ -57,7 +71,7 @@ const initEchartsOneFn = () => {
           }
         },
         // prettier-ignore
-        data: ['2016-1', '2016-2', '2016-3', '2016-4', '2016-5', '2016-6', '2016-7', '2016-8', '2016-9', '2016-10', '2016-11', '2016-12']
+        data: data.value
       },
       {
         type: 'category',
@@ -80,7 +94,7 @@ const initEchartsOneFn = () => {
     ],
     series: [
       {
-        name: 'Precipitation(2015)',
+        name: '高压',
         type: 'line',
         xAxisIndex: 1,
         smooth: true,
@@ -92,7 +106,7 @@ const initEchartsOneFn = () => {
         ]
       },
       {
-        name: 'Precipitation(2016)',
+        name: '低压',
         type: 'line',
         smooth: true,
         emphasis: {

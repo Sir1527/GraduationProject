@@ -8,5 +8,6 @@ enum API {
 export const reqActivity = (id: string) =>
     request.get<any,respActivity>('activity/selectById/' + id)
 
-export const reqActivityList = () =>
-    request.get<any,respActivityList>(API.ACTIVITY_URL)
+export const reqActivityList = (pageNum: number, pageSize: number,) =>
+    request.get<any,respActivityList>(API.ACTIVITY_URL + '?pageNum=' + pageNum +'&pageSize=' +pageSize)
+

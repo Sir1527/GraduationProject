@@ -13,7 +13,7 @@ export interface activity {
 export interface respActivity {
     code?: string,
     msg?: string,
-    data?: activity
+    data?: activity | null,
 }
 
 export interface respActivityList {
@@ -21,6 +21,14 @@ export interface respActivityList {
     msg?: string,
     data?: {
         list: activity[],
-        total: number
+        total: string,
+        pageNum: string,
+        pageSize: string,
     }
+}
+
+export interface form {
+    userId?: string | any,
+    activityId?: string | any,
+    phone?: string | any,
 }

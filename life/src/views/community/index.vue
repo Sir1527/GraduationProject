@@ -1,83 +1,150 @@
 <template>
   <div class="container">
     <a-menu mode="horizontal" :default-selected-keys="['0']">
-      <a-menu-item key="0" >全部</a-menu-item>
-      <a-menu-item key="1" >交友</a-menu-item>
-      <a-menu-item key="2" >问答</a-menu-item>
-      <a-menu-item key="3" >围棋</a-menu-item>
-      <a-menu-item key="4" >象棋</a-menu-item>
-      <a-menu-item key="5" >骑行</a-menu-item>
-      <a-menu-item key="6" >养生</a-menu-item>
-      <a-menu-item key="7" >棋牌</a-menu-item>
-    </a-menu>
+      <a-menu-item key="0" @click="load(1)">全部</a-menu-item>
+      <a-menu-item key="1" @click="loadCategory('交友')">交友</a-menu-item>
+      <a-menu-item key="2" @click="loadCategory('问答')">问答</a-menu-item>
+      <a-menu-item key="3" @click="loadCategory('围棋')">围棋</a-menu-item>
+      <a-menu-item key="4" @click="loadCategory('象棋')">象棋</a-menu-item>
+      <a-menu-item key="5" @click="loadCategory('骑行')">骑行</a-menu-item>
+      <a-menu-item key="6" @click="loadCategory('养生')">养生</a-menu-item>
+      <a-menu-item key="7" @click="loadCategory('麻将')">麻将</a-menu-item>
 
+    </a-menu>
     <a-card :body-style = "{padding:'0 0 15px 0',}" :bordered="false">
+      <div style="height: 40px">
+        <a-button  shape="circle" :style="{float: 'right',marginRight: '10px'}" @click="handleClick">
+          <icon-plus />
+        </a-button>
+      </div>
       <a-list
           class="list-demo-action-layout"
           :bordered="false"
-          :data="dataSource"
-          :pagination-props="paginationProps"
+          :split=false
+          v-for="item in postList" :key="item.id"
       >
-        <template #item="{ item }">
-          <a-list-item class="list-demo-item" action-layout="vertical">
+
+        <a-list-item class="list-demo-item" action-layout="vertical"  @click="$router.push('/PostDetail?id=' + item.postId)">
             <template #actions>
               <span><icon-heart />83</span>
-              <span><icon-star />{{ item.index }}</span>
-              <span><icon-message />Reply</span>
+              <span><icon-star />123</span>
+              <span><icon-eye />{{ item.count }}</span>
             </template>
             <template #extra>
-              <div className="image-area">
-                <img alt="arco-design" :src="item.imageSrc" />
+              <div className="image-area"  v-if="!(item.cover === '' || item.cover === null)">
+                <img alt="arco-design" :src=item.cover />
               </div>
             </template>
             <a-list-item-meta
-                :title="item.title"
-                :description="item.description"
+                :title=item.title
+                :description=item.content
+
             >
               <template #avatar>
-                <a-avatar shape="square">
-                  <img alt="avatar" :src="item.avatar" />
-                </a-avatar>
+                  <a-avatar shape="square">
+                    <img alt="avatar" :src=item.userAvatar />
+                  </a-avatar>
               </template>
             </a-list-item-meta>
-          </a-list-item>
-        </template>
+        </a-list-item>
+
       </a-list>
+      <div style="width: 420px;margin: 30px auto">
+        <a-pagination :total=page.total @change="handleCurrentChange" show-jumper/>
+      </div>
     </a-card>
+
+    <a-modal v-model:visible="visible" @ok="handleOk" @cancel="handleCancel">
+      <template #title>
+        发布新帖子
+      </template>
+      <a-form>
+        标题：<br>
+        <a-form-item field="username" :validate-trigger="['change', 'blur']" hide-label>
+          <a-input placeholder="请输入帖子标题" v-model=form.title>
+          </a-input>
+        </a-form-item>
+        类型：
+        <a-select :style="{width:'320px'}" placeholder="请选择帖子类型" v-model="form.category">
+          <a-option>交友</a-option>
+          <a-option>问答</a-option>
+          <a-option>围棋</a-option>
+          <a-option>象棋</a-option>
+          <a-option>骑行</a-option>
+          <a-option>养生</a-option>
+          <a-option>麻将</a-option>
+        </a-select>
+          内容：<br>
+          <a-textarea placeholder="请输入类容" allow-clear :style="{height:'200px'}" v-model=form.content />
+        上传图片：
+        <a-upload draggable action="http://localhost:9090/files/upload" :headers="{ token: token }" @success="cover" />
+      </a-form>
+    </a-modal>
   </div>
 </template>
 
 <script setup lang="ts">
 
-import {reactive} from "vue";
+import {onMounted, reactive, ref} from "vue";
+import {reqAddPost, reqPostListCategory, reqPostListPage} from "@/api/post/post";
+import type {FormPost, post} from "@/api/post/type";
+import {getToken, getUserAvatar, getUserId} from "@/utils/auth";
 
-const names = ['Socrates', 'Balzac', 'Plato'];
-const avatarSrc = [
-  '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/a8c8cdb109cb051163646151a4a5083b.png~tplv-uwbnlip3yd-webp.webp',
-  '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/e278888093bef8910e829486fb45dd69.png~tplv-uwbnlip3yd-webp.webp',
-  '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/9eeb1800d9b78349b24682c3518ac4a3.png~tplv-uwbnlip3yd-webp.webp',
-];
-const imageSrc = [
-  '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/29c1f9d7d17c503c5d7bf4e538cb7c4f.png~tplv-uwbnlip3yd-webp.webp',
-  '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/04d7bc31dd67dcdf380bc3f6aa07599f.png~tplv-uwbnlip3yd-webp.webp',
-  '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/1f61854a849a076318ed527c8fca1bbf.png~tplv-uwbnlip3yd-webp.webp',
-];
-const dataSource = new Array(15).fill(null).map((_, index) => {
-  return {
-    index: index,
-    avatar: avatarSrc[index % avatarSrc.length],
-    title: names[index % names.length],
-    description:
-        'Beijing ByteDance Technology Co., Ltd. is an enterprise located in China. ByteDance has products such as TikTok, Toutiao, volcano video and Douyin (the Chinese version of TikTok).',
-    imageSrc: imageSrc[index % imageSrc.length],
-  };
-});
-
-const paginationProps = reactive({
-  defaultPageSize: 5,
-  total: dataSource.length
+const postList: post | any = ref<post>();
+const page = reactive({
+  pageNum: 1,
+  pageSize: 5,
+  total: 0,
+  category: '',
 })
+const load = (pageNum: number) => {
+  page.category = ''
+  reqPostListPage(pageNum, page.pageSize).then(res => {
+    postList.value = res.data?.list;
+    page.total = Number (res.data?.total);
+    page.pageNum = Number (res.data?.pageNum);
+    console.log(postList.value)
+  })
+}
+onMounted( () => load(page.pageNum))
+const loadCategory = (category: string | any) => {
+  page.category = category;
+  reqPostListCategory(page.pageNum,page.pageSize,category).then(res => {
+    postList.value = res.data?.list;
+    page.total = Number (res.data?.total);
+  })
+}
 
+const handleCurrentChange = (num: number) => {
+  if (page.category === ''){
+    load(num)
+  }else {
+    page.pageNum = num;
+    loadCategory(page.category)
+  }
+}
+
+const visible = ref(false);
+const userId: string | any = getUserId();
+const userAvatar: string | any = getUserAvatar();
+const token = getToken();
+const form = reactive<FormPost>({});
+const cover = (test: any) => {
+  form.cover = test.response.data;
+}
+const handleClick = () => {
+  visible.value = true;
+};
+const handleOk = () => {
+  visible.value = false;
+  form.userId = userId;
+  form.userAvatar = userAvatar;
+  reqAddPost(form);
+  load(page.pageNum);
+};
+const handleCancel = () => {
+  visible.value = false;
+}
 
 </script>
 
@@ -107,4 +174,35 @@ const paginationProps = reactive({
   margin: 0 4px;
 }
 
+.right-side {
+  display: flex;
+  padding-right: 20px;
+  list-style: none;
+  :deep(.locale-select) {
+    border-radius: 20px;
+  }
+  li {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  a {
+    color: var(--color-text-1);
+    text-decoration: none;
+  }
+  .nav-btn {
+    border-color: rgb(var(--gray-2));
+    color: rgb(var(--gray-8));
+    font-size: 16px;
+  }
+  .trigger-btn,
+  .ref-btn {
+    position: absolute;
+    bottom: 14px;
+  }
+  .trigger-btn {
+    margin-left: 14px;
+  }
+}
 </style>

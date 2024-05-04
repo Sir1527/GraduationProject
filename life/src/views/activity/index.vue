@@ -27,7 +27,7 @@
       </a-grid-item>
     </a-grid>
     <div style="width: 200px;margin: 30px auto">
-      <a-pagination :total="20" :page-size="6" @change="a"/>
+      <a-pagination :total=page.total :page-size=page.pageSize @change="handleCurrentChange"/>
     </div>
   </div>
 </template>
@@ -35,17 +35,29 @@
 <script setup lang="ts">
 
 import {reqActivityList} from "@/api/activity/activity";
-import {onMounted, ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import type {activity} from "@/api/activity/type";
 
-const activityList: activity | null | any = ref<activity>();
-const load = async () => {
-  const res = await reqActivityList();
-  activityList.value = res.data?.list;
-}
-onMounted(() => load())
+let activityList: activity | any = ref<activity>();
 
-const a = (num: number) => {
+const page = reactive({
+  pageNum: 1,
+  pageSize: 8,
+  total: 0,
+})
+
+const load = (pageNum: number, pageSize: number) => {
+  reqActivityList(pageNum,pageSize).then(res => {
+    console.log(res)
+    page.total = Number (res.data?.total);
+    activityList.value = res.data?.list;
+  })
+
+}
+onMounted(() => load(page.pageNum,page.pageSize))
+
+const handleCurrentChange = (num: number) => {
+  load(num,page.pageSize)
 }
 </script>
 

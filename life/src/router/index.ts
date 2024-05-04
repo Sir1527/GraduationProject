@@ -8,6 +8,7 @@ import Community from "@/views/community/index.vue";
 import Health from "@/views/health/index.vue";
 import NewsDetail from '@/views/newsDetail/index.vue';
 import ActivityDetail from "@/views/activityDetail/index.vue"
+import PostDetail from "@/views/postDetail/index.vue"
 
 import {getToken} from "@/utils/auth";
 
@@ -61,6 +62,13 @@ const router = createRouter({
           component: ActivityDetail,
           meta: {
             title: '活动详情'
+          }
+        },
+        {
+          path: '/postDetail',
+          component: PostDetail,
+          meta: {
+            title: '帖子详情'
           }
         }
       ],

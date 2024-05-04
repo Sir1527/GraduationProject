@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 
-import {setToken, setUserId} from "@/utils/auth";
+import {setToken, setUserCAvatar, setUserId} from "@/utils/auth";
 import type { LoginFormData, RespUserData } from "@/api/user/type";
 import { reqLogin } from "@/api/user/user";
 import {useUserStore} from "@/store";
@@ -70,6 +70,7 @@ const login = async () => {
     const token = res.data?.token;
     setUserId(String (res.data?.id))
     setToken(String (token));
+    setUserCAvatar(String (res.data?.avatar))
     setTimeout( () => {
       location.href = '/home'
     })

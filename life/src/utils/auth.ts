@@ -24,4 +24,12 @@ const getUserId = () => {
     return localStorage.getItem('userId');
 };
 
-export { isLogin, getToken, setToken, clearToken, getUserId, setUserId };
+const setUserCAvatar = (avatar: string) => {
+    localStorage.setItem('userCAvatar', avatar);
+};
+
+const getUserAvatar = () => {
+    return localStorage.getItem('userCAvatar');
+};
+
+export { isLogin, getToken, setToken, clearToken, getUserId, setUserId, setUserCAvatar, getUserAvatar };
