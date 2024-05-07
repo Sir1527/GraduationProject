@@ -7,6 +7,24 @@
         BPid,userId,sbp,dbp,createTime
     </sql>
 
+    <insert id="insert" parameterType="com.example.entity.BloodPressure" useGeneratedKeys="true" keyProperty="BPid">
+        insert into bloodpressure
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="BPid != null">BPid,</if>
+            <if test="userId != null">userId,</if>
+            <if test="sbp != null">sbp,</if>
+            <if test="dbp != null">dbp,</if>
+            <if test="createTime != null">createTime,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="BPid != null">#{BPid},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="sbp != null">#{sbp},</if>
+            <if test="dbp != null">#{dbp},</if>
+            <if test="createTime != null">#{createTime},</if>
+        </trim>
+    </insert>
+
     <select id="selectAll" resultType="com.example.entity.BloodPressure">
         select
         <include refid="Base_Column_List" />

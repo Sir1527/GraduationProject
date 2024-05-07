@@ -2,10 +2,9 @@ package com.example.controller;
 
 import com.example.common.Result;
 import com.example.entity.BloodPressure;
+import com.example.entity.BloodPressureECharts;
 import com.example.service.BloodPressureService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,6 +15,12 @@ public class BloodPressureController {
 
     @Resource
     private BloodPressureService bloodPressureService;
+
+    @PostMapping("/add")
+    public Result add(@RequestBody BloodPressure bloodPressure){
+        bloodPressureService.add(bloodPressure);
+        return Result.success();
+    }
 
     @GetMapping("/selectAll")
     public Result selectAll(BloodPressure bloodPressure){
@@ -39,5 +44,11 @@ public class BloodPressureController {
     public Result selectByDbp(BloodPressure bloodPressure){
         List<String> strings = bloodPressureService.selectAllDbp(bloodPressure);
         return Result.success(strings);
+    }
+
+    @GetMapping("/selectEChartsByUserId")
+    public Result selectECharts(BloodPressure bloodPressure){
+        BloodPressureECharts bloodPressureECharts = bloodPressureService.selectAllECharts(bloodPressure);
+        return Result.success(bloodPressureECharts);
     }
 }

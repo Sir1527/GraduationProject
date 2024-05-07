@@ -7,20 +7,18 @@
     <insert id="insert" parameterType="com.example.entity.Likes" useGeneratedKeys="true" keyProperty="like_id">
         insert into likes
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="like_id != null">like_id,</if>
-            <if test="user_id != null">user_id,</if>
-            <if test="news_id != null">news_id,</if>
-            <if test="post_id != null">post_id,</if>
-            <if test="comment_id != null">comment_id,</if>
-            <if test="create_time != null">create_time,</if>
+            <if test="likeId != null">likeId,</if>
+            <if test="userId != null">userId,</if>
+            <if test="newsId != null">newsId,</if>
+            <if test="postId != null">postId,</if>
+            <if test="createTime != null">createTime,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="like_id != null">#{like_id},</if>
-            <if test="user_id != null">#{user_id},</if>
-            <if test="news_id != null">#{news_id},</if>
-            <if test="post_id != null">#{post_id},</if>
-            <if test="comment_id != null">#{comment_id},</if>
-            <if test="create_time != null">#{create_time},</if>
+            <if test="likeId != null">#{likeId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="newsId != null">#{newsId},</if>
+            <if test="postId != null">#{postId},</if>
+            <if test="createTime != null">#{createTime},</if>
         </trim>
     </insert>
 

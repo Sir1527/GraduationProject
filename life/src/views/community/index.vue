@@ -1,29 +1,37 @@
 <template>
   <div class="container">
-    <a-menu mode="horizontal" :default-selected-keys="['0']">
-      <a-menu-item key="0" @click="load(1)">全部</a-menu-item>
-      <a-menu-item key="1" @click="loadCategory('交友')">交友</a-menu-item>
-      <a-menu-item key="2" @click="loadCategory('问答')">问答</a-menu-item>
-      <a-menu-item key="3" @click="loadCategory('围棋')">围棋</a-menu-item>
-      <a-menu-item key="4" @click="loadCategory('象棋')">象棋</a-menu-item>
-      <a-menu-item key="5" @click="loadCategory('骑行')">骑行</a-menu-item>
-      <a-menu-item key="6" @click="loadCategory('养生')">养生</a-menu-item>
-      <a-menu-item key="7" @click="loadCategory('麻将')">麻将</a-menu-item>
 
-    </a-menu>
+    <div style="background-color: var(--color-bg-2);">
+      <ul class="right-side" style="width: 100%">
+        <li style="width: 100%">
+          <a-menu mode="horizontal" :default-selected-keys="['0']">
+          <a-menu-item key="0" @click="load(1)">全部</a-menu-item>
+          <a-menu-item key="1" @click="loadCategory('交友')">交友</a-menu-item>
+          <a-menu-item key="2" @click="loadCategory('问答')">问答</a-menu-item>
+          <a-menu-item key="3" @click="loadCategory('围棋')">围棋</a-menu-item>
+          <a-menu-item key="4" @click="loadCategory('象棋')">象棋</a-menu-item>
+          <a-menu-item key="5" @click="loadCategory('骑行')">骑行</a-menu-item>
+          <a-menu-item key="6" @click="loadCategory('养生')">养生</a-menu-item>
+          <a-menu-item key="7" @click="loadCategory('麻将')">麻将</a-menu-item>
+          </a-menu>
+        </li>
+        <li>
+          <div>
+            <a-button  shape="circle" :style="{float: 'right',marginRight: '10px'}" @click="handleClick">
+              <icon-plus />
+            </a-button>
+          </div>
+        </li>
+      </ul>
+    </div>
     <a-card :body-style = "{padding:'0 0 15px 0',}" :bordered="false">
-      <div style="height: 40px">
-        <a-button  shape="circle" :style="{float: 'right',marginRight: '10px'}" @click="handleClick">
-          <icon-plus />
-        </a-button>
-      </div>
+
       <a-list
           class="list-demo-action-layout"
           :bordered="false"
           :split=false
           v-for="item in postList" :key="item.id"
       >
-
         <a-list-item class="list-demo-item" action-layout="vertical"  @click="$router.push('/PostDetail?id=' + item.postId)">
             <template #actions>
               <span><icon-heart />83</span>
@@ -38,7 +46,6 @@
             <a-list-item-meta
                 :title=item.title
                 :description=item.content
-
             >
               <template #avatar>
                   <a-avatar shape="square">
@@ -53,7 +60,6 @@
         <a-pagination :total=page.total @change="handleCurrentChange" show-jumper/>
       </div>
     </a-card>
-
     <a-modal v-model:visible="visible" @ok="handleOk" @cancel="handleCancel">
       <template #title>
         发布新帖子
@@ -176,33 +182,17 @@ const handleCancel = () => {
 
 .right-side {
   display: flex;
-  padding-right: 20px;
-  list-style: none;
-  :deep(.locale-select) {
-    border-radius: 20px;
-  }
+  margin: 0;
+  padding: 0;
   li {
     display: flex;
     align-items: center;
-    padding: 0 10px;
+    padding: 0;
+    margin: 0;
   }
+}
 
-  a {
-    color: var(--color-text-1);
-    text-decoration: none;
-  }
-  .nav-btn {
-    border-color: rgb(var(--gray-2));
-    color: rgb(var(--gray-8));
-    font-size: 16px;
-  }
-  .trigger-btn,
-  .ref-btn {
-    position: absolute;
-    bottom: 14px;
-  }
-  .trigger-btn {
-    margin-left: 14px;
-  }
+li1 {
+  max-width: 1100px;
 }
 </style>

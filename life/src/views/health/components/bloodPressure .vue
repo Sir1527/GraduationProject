@@ -2,23 +2,38 @@
   <div>
     <div style="font-size: 20px">
       血压
-      <a-button  shape="circle" :style="{float: 'right',marginRight: '10px'}" >
+      <a-button  shape="circle" :style="{float: 'right',marginRight: '10px'}" @click="handleClick">
         <icon-plus />
       </a-button>
-    </div>
-    <div>
-      <div style="height: 40px">
-
-      </div>
     </div>
     <div id="echarts1" ref="container" style="height: 500px;width: 550px;"></div>
   </div>
 
+  <a-modal v-model:visible="visible" @ok="handleOk" @cancel="handleCancel">
+    <template #title>
+      新增血压记录
+    </template>
+    <a-form>
+      请输入高压：<br>
+      <a-form-item field="username" :validate-trigger="['change', 'blur']" hide-label>
+        <a-input placeholder="请输入高压" v-model="form.sbp">
+        </a-input>
+      </a-form-item>
+      请输入低压：<br>
+      <a-form-item field="username" :validate-trigger="['change', 'blur']" hide-label>
+        <a-input placeholder="请输入低压" v-model="form.dbp">
+        </a-input>
+      </a-form-item>
+    </a-form>
+  </a-modal>
 
 </template>
 
 <script setup lang="ts">
-import { ref, inject, onBeforeUnmount} from 'vue';
+import {ref, inject, onBeforeUnmount, onMounted, reactive} from 'vue';
+import {reqAddBloodPressureECharts, reqBloodPressureECharts} from "@/api/BloodPressureECharts/BloodPressureECharts";
+import type {BloodPressureAdd} from "@/api/BloodPressureECharts/type";
+import {getUserId} from "@/utils/auth";
 
 // 获取echart挂载的DOM节点
 const container = ref();
@@ -33,13 +48,10 @@ const Echarts = inject('$echarts');
 // 通过Vue全局注册方式获取
 // const {proxy}: any = getCurrentInstance();
 
-const data = ref([2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027])
-
 const colors = ['#5470C6', '#EE6666'];
 const initEchartsOneFn = () => {
   // echarts初始化
   const myChart = (Echarts as any).init(container.value);
-
   // 或
   // let myChart = proxy.$echarts.init(container.value);
 
@@ -71,7 +83,7 @@ const initEchartsOneFn = () => {
           }
         },
         // prettier-ignore
-        data: data.value
+        data: time.value
       },
       {
         type: 'category',
@@ -84,7 +96,7 @@ const initEchartsOneFn = () => {
             color: colors[0]
           }
         },
-
+        data: time.value
       }
     ],
     yAxis: [
@@ -101,9 +113,7 @@ const initEchartsOneFn = () => {
         emphasis: {
           focus: 'series'
         },
-        data: [
-          1, 12, 10.0, 12, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3
-        ]
+        data: sbp.value
       },
       {
         name: '低压',
@@ -112,9 +122,7 @@ const initEchartsOneFn = () => {
         emphasis: {
           focus: 'series'
         },
-        data: [
-          200,5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7
-        ]
+        data: dbp.value
       }
     ]
   };
@@ -140,6 +148,39 @@ onBeforeUnmount(() => {
   if (timer.value) clearTimeout(timer.value);
 });
 
+
+const time: any = ref(Array<string>);
+const sbp: any = ref(Array<number>);
+const dbp: any = ref(Array<number>);
+const load = () => {
+  reqBloodPressureECharts('2').then(res => {
+    console.log(res)
+    time.value = res.data?.time;
+    sbp.value = res.data?.sbp;
+    dbp.value = res.data?.dbp;
+  })
+}
+onMounted(() => load())
+
+const visible = ref(false);
+const handleClick = () => {
+  visible.value = true;
+};
+const handleOk = () => {
+  visible.value = false;
+  add();
+  location.reload();
+};
+const handleCancel = () => {
+  visible.value = false;
+}
+
+const id = getUserId();
+const form: BloodPressureAdd | any = reactive<BloodPressureAdd>({})
+const add = () =>{
+  form.userId = id;
+  reqAddBloodPressureECharts(form);
+}
 </script>
 
 <style scoped lang="less">

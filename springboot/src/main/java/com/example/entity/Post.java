@@ -11,6 +11,9 @@ public class Post {
     private int count;
     private String createTime;
 
+    private String isLike;
+
+
     public Post() {
     }
 

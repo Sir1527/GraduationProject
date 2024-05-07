@@ -5,18 +5,17 @@ public class Likes {
     private int userId;
     private int newsId;
     private int postId;
-    private int commentId;
+
     private String createTime;
 
     public Likes() {
     }
 
-    public Likes(int likeId, int userId, int newsId, int postId, int commentId, String createTime) {
+    public Likes(int likeId, int userId, int newsId, int postId,String createTime) {
         this.likeId = likeId;
         this.userId = userId;
         this.newsId = newsId;
         this.postId = postId;
-        this.commentId = commentId;
         this.createTime = createTime;
     }
 
@@ -52,14 +51,6 @@ public class Likes {
         this.postId = postId;
     }
 
-    public int getCommentId() {
-        return commentId;
-    }
-
-    public void setCommentId(int commentId) {
-        this.commentId = commentId;
-    }
-
     public String getCreateTime() {
         return createTime;
     }
@@ -75,7 +66,6 @@ public class Likes {
                 ", userId=" + userId +
                 ", newsId=" + newsId +
                 ", postId=" + postId +
-                ", commentId=" + commentId +
                 ", createTime='" + createTime + '\'' +
                 '}';
     }

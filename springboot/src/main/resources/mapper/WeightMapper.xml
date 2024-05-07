@@ -2,33 +2,33 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mapper.BloodPressureMapper">
+<mapper namespace="com.example.mapper.WeightMapper">
     <sql id="Base_Column_List">
-        BPid,userId,sbp,dbp,createTime
+        weightId,userId,weight,BMI,createTime
     </sql>
 
-    <insert id="insert" parameterType="com.example.entity.BloodPressure" useGeneratedKeys="true" keyProperty="BPid">
-        insert into bloodpressure
+    <insert id="insert" parameterType="com.example.entity.Weight" useGeneratedKeys="true" keyProperty="weightId">
+        insert into weight
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="BPid != null">BPid,</if>
+            <if test="weightId != null">weightId,</if>
             <if test="userId != null">userId,</if>
-            <if test="sbp != null">sbp,</if>
-            <if test="dbp != null">dbp,</if>
+            <if test="weight != null">weight,</if>
+            <if test="BMI != null">BMI,</if>
             <if test="createTime != null">createTime,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="BPid != null">#{BPid},</if>
+            <if test="weightId != null">#{weightId},</if>
             <if test="userId != null">#{userId},</if>
-            <if test="sbp != null">#{sbp},</if>
-            <if test="dbp != null">#{dbp},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="BMI != null">#{BMI},</if>
             <if test="createTime != null">#{createTime},</if>
         </trim>
     </insert>
 
-    <select id="selectAll" resultType="com.example.entity.BloodPressure">
+    <select id="selectAll" resultType="com.example.entity.Weight">
         select
         <include refid="Base_Column_List" />
-        from bloodPressure
+        from weight
         <where>
             <if test="userId != null"> and userId = #{userId}</if>
         </where>
