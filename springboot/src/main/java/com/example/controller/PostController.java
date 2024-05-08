@@ -25,23 +25,22 @@ public class PostController {
     @GetMapping("/selectAll")
     public Result selectAll(Post post){
         List<Post> list = postService.selectAll(post);
-        for (Post post1 : list) {
-            System.out.println(post1);
-        }
         return Result.success(list);
     }
 
     @GetMapping("/selectPage")
     public Result selectPage(Post post,
                              @RequestParam(defaultValue = "1") Integer pageNum,
-                             @RequestParam(defaultValue = "10") Integer pageSize){
-        PageInfo<Post> postPageInfo = postService.selectPage(post, pageNum, pageSize);
+                             @RequestParam(defaultValue = "10") Integer pageSize,
+                             @RequestParam(defaultValue = "0") Integer userId){
+        PageInfo<Post> postPageInfo = postService.selectPage(post, pageNum, pageSize,userId);
         return Result.success(postPageInfo);
     }
 
     @GetMapping("/selectById/{id}")
-    public Result selectById(@PathVariable Integer id){
-        Post post = postService.selectById(id);
+    public Result selectById(@PathVariable Integer id,
+                             @RequestParam(defaultValue = "0") Integer userId){
+        Post post = postService.selectById(id,userId);
         return Result.success(post);
     }
 

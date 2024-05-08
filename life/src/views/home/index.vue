@@ -49,10 +49,14 @@
             <template #item="{ item }">
                 <a-list-item class="list-demo-item" action-layout="vertical" @click="$router.push('/newsDetail?id=' + item.id)">
                   <template #actions style="justify-content: flex-end;">
-                    <div>
-                      <span style="margin-right: 5px"><icon-clock-circle />{{ item.time }}</span>
-                      <span><icon-eye />{{ item.count }}</span>
-                    </div>
+                    <span style="margin-right: 5px"><icon-clock-circle />{{ item.time }}</span>
+                    <span><icon-eye />{{ item.count }}</span>
+                    <span v-if="item.likes == '已点赞'">
+                      <IconHeartFill :style="{ color: '#f53f3f' }" />
+                    </span>
+                    <span v-else>
+                      <IconHeart />
+                    </span>
                   </template>
                   <template #extra>
                     <div className="image-area" style="height: 98px">
@@ -99,6 +103,7 @@ import type {TableData} from "@arco-design/web-vue";
 import request from "@/utils/http";
 import type {respCategory} from "@/api/category/type";
 import type {respActivityList} from "@/api/activity/type";
+import {getUserId} from "@/utils/auth";
 
 const images = [
   '../src/assets/carousel/1.png',
@@ -118,12 +123,14 @@ const paginationProps = reactive({
   defaultPageSize: 4,
   total: newsData.total,
 })
+const id = getUserId()
 const getTableData = async () => {
-  const res = await getTableDateAPI();
+  const res = await getTableDateAPI(id);
   newsData.total = res.data.total;
   newsData.pageSize = res.data.pageSize;
   newsData.pageNum =res.data.pageNum;
   newsData.list = res.data.list
+  console.log(newsData.list)
   paginationProps.total = newsData.total;
 }
 

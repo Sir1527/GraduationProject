@@ -34,8 +34,12 @@
       >
         <a-list-item class="list-demo-item" action-layout="vertical"  @click="$router.push('/PostDetail?id=' + item.postId)">
             <template #actions>
-              <span><icon-heart />83</span>
-              <span><icon-star />123</span>
+              <span v-if="item.isLike == '已点赞'">
+                <IconHeartFill :style="{ color: '#f53f3f' }" /> 已赞
+              </span>
+              <span v-else>
+                <IconHeart /> 点赞
+              </span>
               <span><icon-eye />{{ item.count }}</span>
             </template>
             <template #extra>
@@ -95,6 +99,8 @@ import {onMounted, reactive, ref} from "vue";
 import {reqAddPost, reqPostListCategory, reqPostListPage} from "@/api/post/post";
 import type {FormPost, post} from "@/api/post/type";
 import {getToken, getUserAvatar, getUserId} from "@/utils/auth";
+import {deleteLike, reqLikeAdd} from "@/api/like/like";
+import {reqNewsCount} from "@/api/news/news";
 
 const postList: post | any = ref<post>();
 const page = reactive({
@@ -105,7 +111,7 @@ const page = reactive({
 })
 const load = (pageNum: number) => {
   page.category = ''
-  reqPostListPage(pageNum, page.pageSize).then(res => {
+  reqPostListPage(pageNum, page.pageSize,userId).then(res => {
     postList.value = res.data?.list;
     page.total = Number (res.data?.total);
     page.pageNum = Number (res.data?.pageNum);

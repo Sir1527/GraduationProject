@@ -65,8 +65,9 @@ public class NewsController {
      * 根据ID查询
      */
     @GetMapping("/selectById/{id}")
-    public Result selectById(@PathVariable Integer id) {
-        News news = newsService.selectById(id);
+    public Result selectById(@PathVariable Integer id,
+                             @RequestParam(defaultValue = "0") Integer userId) {
+        News news = newsService.selectById(id,userId);
         return Result.success(news);
     }
 
@@ -85,8 +86,9 @@ public class NewsController {
     @GetMapping("/selectPage")
     public Result selectPage(News news,
                              @RequestParam(defaultValue = "1") Integer pageNum,
-                             @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageInfo<News> page = newsService.selectPage(news, pageNum, pageSize);
+                             @RequestParam(defaultValue = "10") Integer pageSize,
+                             @RequestParam(defaultValue = "0") Integer userId) {
+        PageInfo<News> page = newsService.selectPage(news, pageNum, pageSize,userId);
         return Result.success(page);
     }
 

@@ -10,14 +10,12 @@ public class Post {
     private String category;
     private int count;
     private String createTime;
-
     private String isLike;
-
 
     public Post() {
     }
 
-    public Post(int postId, int userId, String userAvatar, String title, String cover, String content, String category, int count, String createTime) {
+    public Post(int postId, int userId, String userAvatar, String title, String cover, String content, String category, int count, String createTime, String isLike) {
         this.postId = postId;
         this.userId = userId;
         this.userAvatar = userAvatar;
@@ -27,6 +25,7 @@ public class Post {
         this.category = category;
         this.count = count;
         this.createTime = createTime;
+        this.isLike = isLike;
     }
 
     public int getPostId() {
@@ -101,6 +100,13 @@ public class Post {
         this.createTime = createTime;
     }
 
+    public String getIsLike() {
+        return isLike;
+    }
+
+    public void setIsLike(String isLike) {
+        this.isLike = isLike;
+    }
     @Override
     public String toString() {
         return "Post{" +
@@ -113,6 +119,7 @@ public class Post {
                 ", category='" + category + '\'' +
                 ", count=" + count +
                 ", createTime='" + createTime + '\'' +
+                ", isLike='" + isLike + '\'' +
                 '}';
     }
 }

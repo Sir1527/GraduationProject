@@ -45,7 +45,10 @@
     </insert>
 
     <select id="selectById" resultType="com.example.entity.Post">
-        SELECT * FROM `xm-retirement`.`post` WHERE postId = #{postId}
+        SELECT
+        <include refid="Base_Column_List"></include>
+        from post
+        where postId = #{postId}
     </select>
 
 </mapper>

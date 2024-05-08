@@ -7,6 +7,7 @@ export interface newsData {
     time?: string,
     count?: number,
     category?: string,
+    likes?: string,
 }
 
 export interface TableData {

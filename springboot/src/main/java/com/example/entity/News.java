@@ -24,6 +24,22 @@ public class News implements Serializable {
     private Integer count;
     /** 分类 */
     private String category;
+    private String Likes;
+
+    public News() {
+    }
+
+    public News(Integer id, String title, String descr, String content, String cover, String time, Integer count, String category, String likes) {
+        this.id = id;
+        this.title = title;
+        this.descr = descr;
+        this.content = content;
+        this.cover = cover;
+        this.time = time;
+        this.count = count;
+        this.category = category;
+        this.Likes = likes;
+    }
 
     public Integer getId() {
         return id;
@@ -89,4 +105,26 @@ public class News implements Serializable {
         this.category = category;
     }
 
+    public String getLikes() {
+        return Likes;
+    }
+
+    public void setLikes(String likes) {
+        Likes = likes;
+    }
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", descr='" + descr + '\'' +
+                ", content='" + content + '\'' +
+                ", cover='" + cover + '\'' +
+                ", time='" + time + '\'' +
+                ", count=" + count +
+                ", category='" + category + '\'' +
+                ", Likes='" + Likes + '\'' +
+                '}';
+    }
 }

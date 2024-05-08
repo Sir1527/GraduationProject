@@ -1,17 +1,16 @@
 package com.example.entity;
 
 public class Likes {
-    private int likeId;
-    private int userId;
-    private int newsId;
-    private int postId;
-
+    private Integer likeId;
+    private Integer userId;
+    private Integer newsId;
+    private Integer postId;
     private String createTime;
 
     public Likes() {
     }
 
-    public Likes(int likeId, int userId, int newsId, int postId,String createTime) {
+    public Likes(Integer likeId, Integer userId, Integer newsId, Integer postId, String createTime) {
         this.likeId = likeId;
         this.userId = userId;
         this.newsId = newsId;
@@ -19,35 +18,35 @@ public class Likes {
         this.createTime = createTime;
     }
 
-    public int getLikeId() {
+    public Integer getLikeId() {
         return likeId;
     }
 
-    public void setLikeId(int likeId) {
+    public void setLikeId(Integer likeId) {
         this.likeId = likeId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public int getNewsId() {
+    public Integer getNewsId() {
         return newsId;
     }
 
-    public void setNewsId(int newsId) {
+    public void setNewsId(Integer newsId) {
         this.newsId = newsId;
     }
 
-    public int getPostId() {
+    public Integer getPostId() {
         return postId;
     }
 
-    public void setPostId(int postId) {
+    public void setPostId(Integer postId) {
         this.postId = postId;
     }
 

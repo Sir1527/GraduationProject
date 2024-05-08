@@ -8,6 +8,7 @@ export interface post {
     category?: string,
     count?: string,
     createTime?:string,
+    isLike?: string,
 }
 
 export interface RespPostPageList {

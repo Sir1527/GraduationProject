@@ -8,8 +8,8 @@ enum API {
     POST_COUNT_URL = 'post/updateCount/'
 }
 
-export const reqPostListPage = (pageNum: number | any, pageSize: number | any) =>
-    request.get<any, RespPostPageList>(API.POST_LIST_PAGE_URL + '?pageNum=' + pageNum + '&pageSize=' + pageSize)
+export const reqPostListPage = (pageNum: number | any, pageSize: number | any, userId: string | any) =>
+    request.get<any, RespPostPageList>(API.POST_LIST_PAGE_URL + '?pageNum=' + pageNum + '&pageSize=' + pageSize + '&userId=' + userId)
 
 export const reqAddPost = (data: FormPost) =>
     request.post<any, RespPost>(API.POST_ADD_URL, data)
@@ -17,8 +17,8 @@ export const reqAddPost = (data: FormPost) =>
 export const reqPostListCategory = (pageNum: number | any, pageSize: number | any,category: string | any) =>
     request.get<any, RespPostPageList>(API.POST_LIST_PAGE_URL+ '?pageNum=' + pageNum + '&pageSize=' + pageSize + '&category=' + category)
 
-export const reqPost = (id: number | any) =>
-    request.get<any,RespPost>(API.POST_URL + id)
+export const reqPost = (id: number | any, userId: string | any) =>
+    request.get<any,RespPost>(API.POST_URL + id + '?userId=' + userId)
 
 export const reqPostCount = (id: string) =>
     request.put<any,RespPost>(API.POST_COUNT_URL + id)
