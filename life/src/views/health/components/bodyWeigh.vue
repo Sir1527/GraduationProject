@@ -13,7 +13,7 @@
     <template #title>
       新增体重记录
     </template>
-    <a-form>
+
       请输入体重(单位：kg)：<br>
       <a-form-item field="username" :validate-trigger="['change', 'blur']" hide-label>
         <a-input placeholder="请输入体重" v-model="form.weight"></a-input>
@@ -22,7 +22,7 @@
       <a-form-item field="username" :validate-trigger="['change', 'blur']" hide-label>
         <a-input placeholder="请输入体脂率" v-model="form.bmi"></a-input>
       </a-form-item>
-    </a-form>
+
   </a-modal>
 
 </template>
@@ -43,9 +43,6 @@ const load = () => {
     weight.value = res.data?.weight;
     bmi.value = res.data?.bmi;
     time.value = res.data?.time;
-    console.log(weight.value);
-    console.log(bmi.value);
-    console.log(time.value);
   })
 }
 onMounted( () => load())

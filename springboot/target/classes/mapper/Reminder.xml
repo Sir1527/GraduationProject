@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ReminderMapper">
+    <sql id="Base_Column_List">
+            reminderId,userId,reminderTime,title,createTime
+    </sql>
+
+    <insert id="insert" parameterType="com.example.entity.Glu" useGeneratedKeys="true" keyProperty="reminderId">
+        insert into reminder
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reminderId != null">reminderId,</if>
+            <if test="userId != null">userId,</if>
+            <if test="reminderTime != null">reminderTime,</if>
+            <if test="title != null">title,</if>
+            <if test="createTime != null">createTime,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="reminderId != null">#{reminderId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="reminderTime != null">#{reminderTime},</if>
+            <if test="title != null">#{title},</if>
+            <if test="createTime != null">#{createTime},</if>
+        </trim>
+    </insert>
+
+    <select id="selectAll" resultType="com.example.entity.Reminder">
+        select
+        <include refid="Base_Column_List" />
+        from reminder
+        <where>
+            <if test="userId != null"> and userId = #{userId}</if>
+        </where>
+        order by reminderTime desc limit 4
+    </select>
+
+</mapper>

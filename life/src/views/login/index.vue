@@ -56,10 +56,10 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 
-import {setToken, setUserCAvatar, setUserId} from "@/utils/auth";
+import {setName, setPhone, setToken, setUserCAvatar, setUserEmail, setUserId, setUserName} from "@/utils/auth";
 import type { LoginFormData, RespUserData } from "@/api/user/type";
 import { reqLogin } from "@/api/user/user";
-import {useUserStore} from "@/store";
+import { useUserStore } from "@/store";
 
 const userStore = useUserStore();
 const form: LoginFormData = reactive({role: "USER"})
@@ -67,20 +67,21 @@ const form: LoginFormData = reactive({role: "USER"})
 const login = async () => {
   const res: RespUserData = await reqLogin(form);
   if(res.code === '200') {
+    userStore.setInfo(res.data);
     const token = res.data?.token;
-    setUserId(String (res.data?.id))
     setToken(String (token));
-    setUserCAvatar(String (res.data?.avatar))
+    setUserId(String (res.data?.id));
+    setUserCAvatar(String (res.data?.avatar));
+    setPhone(String (res.data.phone));
+    setUserName(String (res.data.username));
+    setName(String (res.data.name));
+    setUserEmail(String (res.data.email))
     setTimeout( () => {
       location.href = '/home'
     })
   } else {
     alert("账号密码错误")
   }
-}
-
-const loginU = async () => {
-  await userStore.login(form)
 }
 
 const handleSubmit = () => {

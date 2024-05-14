@@ -1,29 +1,30 @@
 import { defineStore } from 'pinia';
-import type { UserState } from './types';
-import {getToken, setToken} from "@/utils/auth";
-import type {LoginFormData, RespUserData} from "@/api/user/type";
-import {reqLogin} from "@/api/user/user";
-import {set} from "@vueuse/core";
+import type {RoleType, UserState} from './types';
 
-export const useUserStore = defineStore('User', {
-    state: (): UserState => {
-        return {
-            token: getToken() as string,
-        }
+const useUserStore = defineStore('user', {
+    state: (): UserState => ({
+        id: undefined,
+        username: undefined,
+        name: undefined,
+        avatar:undefined,
+        role: undefined,
+        phone: undefined,
+        email: undefined,
+        token: undefined,
+    }),
+
+    getters: {
+        userInfo(state: UserState): UserState  {
+            return { ...state};
+        },
     },
 
     actions: {
-        async login(data: LoginFormData){
-            const res: RespUserData = await reqLogin(data)
-            if (res.code === '200') {
-                this.token = res.data?.token as string;
-                setToken(res.data?.token as string);
-                return 'ok'
-            }else {
-                return Promise.reject(new Error(res.msg as string))
-            }
+        setInfo(partial: Partial<UserState>) {
+            this.$patch(partial);
         }
-    }
+    },
+    persist: true
 })
 
 

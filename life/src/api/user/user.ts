@@ -1,5 +1,5 @@
 import  request  from "@/utils/http";
-import type {LoginFormData, RespUserData} from "@/api/user/type";
+import type {LoginFormData, RespUserData, UserData} from "@/api/user/type";
 
 enum API {
     LOGIN_URL = '/login',
@@ -11,6 +11,9 @@ export const reqLogin = (data: LoginFormData) =>
 
 export const reqUserById = (id: string | any) =>
     request.get<any,RespUserData>(API.USER_ID + id)
+
+export const updateUser = (userData: UserData) =>
+    request.put('/user/update', userData)
 
 
 

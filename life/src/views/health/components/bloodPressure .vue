@@ -13,7 +13,7 @@
     <template #title>
       新增血压记录
     </template>
-    <a-form>
+
       请输入高压：<br>
       <a-form-item field="username" :validate-trigger="['change', 'blur']" hide-label>
         <a-input placeholder="请输入高压" v-model="form.sbp">
@@ -24,7 +24,6 @@
         <a-input placeholder="请输入低压" v-model="form.dbp">
         </a-input>
       </a-form-item>
-    </a-form>
   </a-modal>
 
 </template>
@@ -154,7 +153,6 @@ const sbp: any = ref(Array<number>);
 const dbp: any = ref(Array<number>);
 const load = () => {
   reqBloodPressureECharts('2').then(res => {
-    console.log(res)
     time.value = res.data?.time;
     sbp.value = res.data?.sbp;
     dbp.value = res.data?.dbp;

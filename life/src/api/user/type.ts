@@ -1,3 +1,5 @@
+import type {UserState} from "@/store/modules/user/types";
+
 export interface LoginFormData {
     username?: string,
     password?: string,
@@ -5,7 +7,8 @@ export interface LoginFormData {
 }
 
 export interface UserData {
-    id?: string,
+    id?: string | any,
+    name?: string,
     username?: string,
     password?: string,
     role?: string,
@@ -19,5 +22,5 @@ export interface UserData {
 export interface RespUserData {
     code?: string,
     msg?: string,
-    data?: UserData,
+    data: UserState,
 }

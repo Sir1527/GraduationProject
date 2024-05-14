@@ -13,12 +13,10 @@
     <template #title>
       新增血糖记录
     </template>
-    <a-form>
       请输入血糖值：<br>
       <a-form-item field="username" :validate-trigger="['change', 'blur']" hide-label>
         <a-input placeholder="请输入血糖值" v-model="form.glu"></a-input>
       </a-form-item>
-    </a-form>
   </a-modal>
 </template>
 
@@ -35,8 +33,8 @@ const handleClick = () => {
   visible.value = true;
 };
 const handleOk = () => {
+  add();
   visible.value = false;
-  add()
   location.reload();
 };
 const handleCancel = () => {
@@ -58,7 +56,6 @@ const form: GluAdd | any = reactive<GluAdd>({});
 const add = () => {
   form.userId = id;
   reqAddGluECharts(form).then(res => {
-    console.log(res)
   });
 }
 

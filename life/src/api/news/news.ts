@@ -1,6 +1,7 @@
 import request from "@/utils/http"
 import type {RespNews, RespNewsPageData, RespNewsTopData} from "@/api/news/type";
 import {getUserId} from "@/utils/auth";
+import type {UserData} from "@/api/user/type";
 
 enum API {
     NEWS_TOP_URL = '/news/selectTopNews',

@@ -2,30 +2,20 @@
   <div class="navbar">
     <div class="left-side">
       <a-space>
-        <img
-          alt="logo"
-          src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image"
-        />
+        <img alt="logo"
+          src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image" />
       </a-space>
     </div>
     <div class="center-side">
-      <Menu/>
+      <Menu />
     </div>
     <ul class="right-side">
       <li>
-        <a-tooltip
-            :content="
-            theme === 'light'
-              ? '点击切换为暗黑模式'
-              : '点击切换为亮色模式'
-          "
-        >
-          <a-button
-              class="nav-btn"
-              type="outline"
-              :shape="'circle'"
-              @click="handleToggleTheme"
-          >
+        <a-tooltip :content="theme === 'light'
+            ? '点击切换为暗黑模式'
+            : '点击切换为亮色模式'
+          ">
+          <a-button class="nav-btn" type="outline" :shape="'circle'" @click="handleToggleTheme">
             <template #icon>
               <icon-moon-fill v-if="theme === 'dark'" />
               <icon-sun-fill v-else />
@@ -34,14 +24,8 @@
         </a-tooltip>
       </li>
       <li>
-        <a-tooltip
-            :content="isFullscreen ? '点击退出全屏模式': '点击切换全屏模式' ">
-          <a-button
-              class="nav-btn"
-              type="outline"
-              :shape="'circle'"
-              @click="toggleFullScreen"
-          >
+        <a-tooltip :content="isFullscreen ? '点击退出全屏模式' : '点击切换全屏模式'">
+          <a-button class="nav-btn" type="outline" :shape="'circle'" @click="toggleFullScreen">
             <template #icon>
               <icon-fullscreen-exit v-if="isFullscreen" />
               <icon-fullscreen v-else />
@@ -51,15 +35,12 @@
       </li>
       <li>
         <a-dropdown trigger="click" v-if="isLoginUser">
-          <a-avatar
-              :size="32"
-              :style="{ marginRight: '8px', cursor: 'pointer' }"
-          >
+          <a-avatar :size="32" :style="{ marginRight: '8px', cursor: 'pointer' }">
             <img alt="avatar" :src=userImage />
           </a-avatar>
           <template #content>
             <a-doption>
-              <a-space>
+              <a-space @click="$router.push('/userSetting')">
                 <icon-user />
                 <span>
                   我的资料
@@ -67,7 +48,7 @@
               </a-space>
             </a-doption>
             <a-doption @click="handleLogout">
-              <a-space >
+              <a-space>
                 <icon-export />
                 <span>
                   退出登录
@@ -76,7 +57,7 @@
             </a-doption>
           </template>
         </a-dropdown>
-        <div v-else  @click="$router.push('/login')">
+        <div v-else @click="$router.push('/login')">
           登录
         </div>
       </li>
@@ -87,16 +68,16 @@
 <script lang="ts" setup>
 import Menu from '@/components/menu/index.vue';
 
-import {useAppStore} from "@/store";
-import {computed, onMounted, ref} from "vue";
-import {useDark, useFullscreen, useToggle} from "@vueuse/core";
-import {clearToken, getToken, getUserAvatar, isLogin} from "@/utils/auth";
+import { useAppStore } from "@/store";
+import { computed, onMounted, ref } from "vue";
+import { useDark, useFullscreen, useToggle } from "@vueuse/core";
+import { clearToken, getToken, getUserAvatar, isLogin } from "@/utils/auth";
 
 const appStore = useAppStore();
 
 const { isFullscreen, toggle: toggleFullScreen } = useFullscreen();
 
-const theme = computed( () => {
+const theme = computed(() => {
   return appStore.theme;
 });
 
@@ -128,73 +109,78 @@ const handleLogout = () => {
 
 const userImage: string | any = ref('');
 const userAvatar = () => {
-  if (isLoginUser){
+  if (isLoginUser) {
     console.log(getUserAvatar())
     userImage.value = getUserAvatar();
   }
 }
-onMounted( () => userAvatar())
+onMounted(() => userAvatar())
 
 </script>
 
 <style scoped lang="less">
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    height: 100%;
-    background-color: var(--color-bg-2);
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  background-color: var(--color-bg-2);
 
+}
+
+
+.left-side {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.center-side {
+  height: 60px;
+  flex: 1;
+}
+
+.right-side {
+  display: flex;
+  padding-right: 20px;
+  list-style: none;
+
+  :deep(.locale-select) {
+    border-radius: 20px;
   }
 
-
-  .left-side {
+  li {
     display: flex;
     align-items: center;
-    padding-left: 20px;
+    padding: 0 10px;
   }
 
-  .center-side {
-    height: 60px;
-    flex: 1;
+  a {
+    color: var(--color-text-1);
+    text-decoration: none;
   }
 
-  .right-side {
-    display: flex;
-    padding-right: 20px;
-    list-style: none;
-    :deep(.locale-select) {
-      border-radius: 20px;
-    }
-    li {
-      display: flex;
-      align-items: center;
-      padding: 0 10px;
-    }
-
-    a {
-      color: var(--color-text-1);
-      text-decoration: none;
-    }
-    .nav-btn {
-      border-color: rgb(var(--gray-2));
-      color: rgb(var(--gray-8));
-      font-size: 16px;
-    }
-    .trigger-btn,
-    .ref-btn {
-      position: absolute;
-      bottom: 14px;
-    }
-    .trigger-btn {
-      margin-left: 14px;
-    }
+  .nav-btn {
+    border-color: rgb(var(--gray-2));
+    color: rgb(var(--gray-8));
+    font-size: 16px;
   }
+
+  .trigger-btn,
+  .ref-btn {
+    position: absolute;
+    bottom: 14px;
+  }
+
+  .trigger-btn {
+    margin-left: 14px;
+  }
+}
 </style>
 
 <style lang="less">
-  .message-popover {
-    .arco-popover-content {
-      margin-top: 0;
-    }
+.message-popover {
+  .arco-popover-content {
+    margin-top: 0;
   }
+}
 </style>

@@ -151,10 +151,14 @@ const loadCategoryNews = (category_: string) => {
 }
 onMounted(() =>loadCategoryNews(''))
 
+import {useUserStore} from "@/store";
+const userStore = useUserStore();
+
 const categoryList: any = ref([]);
 const loadCategory = () => {
   request.get<respCategory>('/category/selectAll').then(res => {
     categoryList.value = res.data;
+    console.log(userStore.name);
   })
 }
 onMounted(() => loadCategory())

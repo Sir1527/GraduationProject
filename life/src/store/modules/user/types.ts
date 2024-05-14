@@ -1,12 +1,12 @@
 export type RoleType = 'USER' | 'ADMIN'
 
 export interface UserState {
+    id?: string;
     username?: string;
-    password?: string;
     name?: string;
     avatar?: string;
     phone?: string;
     email?: string;
-    token: string | null;
+    token?: string;
     role?: RoleType;
 }
