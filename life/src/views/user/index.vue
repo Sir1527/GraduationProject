@@ -12,7 +12,7 @@
             <BasicInformation />
           </a-tab-pane>
           <a-tab-pane key="2" title="安全设置">
-            安全信息
+            <Password />
           </a-tab-pane>
         </a-tabs>
       </a-col>
@@ -26,6 +26,7 @@ import BasicInformation from './components/basic-information.vue';
 import {reqUserById} from "@/api/user/user";
 import {setName, setPhone, setUserCAvatar, setUserEmail, setUserId, setUserName,getUserId} from "@/utils/auth";
 import {onMounted} from "vue";
+import Password from "@/views/user/components/password.vue";
 
 const id = getUserId();
 const test = () => {

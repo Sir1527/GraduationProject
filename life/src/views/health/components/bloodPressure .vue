@@ -105,7 +105,7 @@ const initEchartsOneFn = () => {
     ],
     series: [
       {
-        name: '高压',
+        name: '低压',
         type: 'line',
         xAxisIndex: 1,
         smooth: true,
@@ -115,7 +115,7 @@ const initEchartsOneFn = () => {
         data: sbp.value
       },
       {
-        name: '低压',
+        name: '高压',
         type: 'line',
         smooth: true,
         emphasis: {

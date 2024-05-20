@@ -3,7 +3,7 @@
     <div style="height: 60px; background-color: white">
       <div style="width: 60%; height: 100%; display: flex; align-items: center; margin:  0 auto">
         <img src="@/assets/imgs/logo.png" alt="" style="width: 40px">
-        <span style="color: #2A60C9; font-size: 24px; font-weight: bold; margin-left: 10px">社区养老系统</span>
+        <span style="color: #2A60C9; font-size: 24px; font-weight: bold; margin-left: 10px">老年生活助手平台管理端</span>
       </div>
     </div>
     <div style="height: calc(100vh - 60px); width: 60%; margin:  0 auto; display: flex; align-items: center">

@@ -9,12 +9,6 @@
     <a-form-item
       field="email"
       label="邮箱"
-      :rules="[
-        {
-          required: true,
-          message: '请输入邮箱',
-        },
-      ]"
     >
       <a-input
         v-model="formData.email"
@@ -24,12 +18,6 @@
     <a-form-item
         field="name"
         label="姓名"
-        :rules="[
-        {
-          required: true,
-          message: '请输入姓名',
-        },
-      ]"
     >
       <a-input
           v-model="formData.name"
@@ -39,12 +27,6 @@
     <a-form-item
       field="username"
       label="昵称"
-      :rules="[
-        {
-          required: true,
-          message: '请输入昵称',
-        },
-      ]"
     >
       <a-input
         v-model="formData.username"
@@ -54,12 +36,6 @@
     <a-form-item
         field="phone"
         label="电话"
-        :rules="[
-        {
-          required: true,
-          message: '请输入电话',
-        },
-      ]"
     >
       <a-input
           v-model="formData.phone"
